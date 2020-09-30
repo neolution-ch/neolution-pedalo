@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedaloWebApp", "PedaloWebApp\PedaloWebApp.csproj", "{8A5B5538-88D8-488C-9A62-3B74DF3F4AAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PedaloWebApp", "PedaloWebApp\PedaloWebApp.csproj", "{8A5B5538-88D8-488C-9A62-3B74DF3F4AAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedaloWebApp.FunctionalTests", "PedaloWebApp.FunctionalTests\PedaloWebApp.FunctionalTests.csproj", "{E5485F27-D7FA-4E76-899C-490B9A56324F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8A5B5538-88D8-488C-9A62-3B74DF3F4AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A5B5538-88D8-488C-9A62-3B74DF3F4AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A5B5538-88D8-488C-9A62-3B74DF3F4AAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5485F27-D7FA-4E76-899C-490B9A56324F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5485F27-D7FA-4E76-899C-490B9A56324F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5485F27-D7FA-4E76-899C-490B9A56324F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5485F27-D7FA-4E76-899C-490B9A56324F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
