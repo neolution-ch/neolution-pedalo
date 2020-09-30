@@ -10,7 +10,7 @@
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
 
-        public virtual Pedalo Pedalo { get; set; }
-        public virtual Customer Customer { get; set; }
+        public Pedalo Pedalo { get; set; }
+        public Customer Customer { get; set; }
     }
 }

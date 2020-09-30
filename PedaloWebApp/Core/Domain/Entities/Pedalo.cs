@@ -11,7 +11,7 @@
         public int Capacity { get; set; }
         public decimal HourlyRate { get; set; }
 
-        public virtual ICollection<Booking> Bookings { get; set; }
+        public ICollection<Booking> Bookings { get; set; }
     }
 
     public enum PedaloColor

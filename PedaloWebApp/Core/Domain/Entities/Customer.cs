@@ -10,6 +10,6 @@
         public string LastName { get; set; }
         public DateTime BirthdayDate { get; set; }
 
-        public virtual ICollection<Booking> Bookings { get; set; }
+        public ICollection<Booking> Bookings { get; set; }
     }
 }
