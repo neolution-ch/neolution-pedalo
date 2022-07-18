@@ -1,6 +1,6 @@
 namespace PedaloWebApp.FunctionalTests.SeleniumTests
 {
-    using Neolution.BuildAutomation.Selenium;
+    using Neolution.Automation.Selenium;
     using PageObjectModels;
     using Shouldly;
     using Xunit;

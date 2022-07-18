@@ -1,6 +1,5 @@
 ﻿namespace PedaloWebApp.FunctionalTests.SeleniumTests.PageObjectModels
 {
-    using System;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Remote;
 
