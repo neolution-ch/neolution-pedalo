@@ -1,4 +1,5 @@
 ﻿@page
+@using PedaloWebApp.Core.Domain.Entities;
 @model PedaloWebApp.Pages.Pedaloes.EditModel
 @{
     ViewData["Title"] = "Edit";
@@ -17,7 +18,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Pedalo.Color" class="control-label"></label>
-                <input asp-for="Pedalo.Color" class="form-control" />
+                <select asp-for="Pedalo.Color" class="form-control">
+                    @foreach (var color in Enum.GetValues(typeof(PedaloColor)))
+                    {
+                        <option value="@color">@color</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Pedalo.Capacity" class="control-label"></label>
