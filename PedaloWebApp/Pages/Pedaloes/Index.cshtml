@@ -39,6 +39,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.HourlyRate)
             </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.PedaloId">Edit</a>
+            </td>
         </tr>
     }
     </tbody>
