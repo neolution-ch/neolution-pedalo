@@ -127,7 +127,7 @@
             context.Bookings.Add(new Booking { CustomerId = customer6.CustomerId, PedaloId = pedalo1.PedaloId, StartDate = new DateTime(2016, 7, 25, 15, 05, 00), EndDate = new DateTime(2016, 7, 25, 15, 55, 00) });
             context.Bookings.Add(new Booking { CustomerId = customer7.CustomerId, PedaloId = pedalo1.PedaloId, StartDate = new DateTime(2016, 7, 25, 16, 20, 00), EndDate = new DateTime(2016, 7, 25, 17, 05, 00) });
             context.Bookings.Add(new Booking { CustomerId = customer2.CustomerId, PedaloId = pedalo3.PedaloId, StartDate = new DateTime(2016, 7, 25, 16, 30, 00), EndDate = new DateTime(2016, 7, 25, 17, 30, 00) });
-            context.Bookings.Add(new Booking { CustomerId = customer8.CustomerId, PedaloId = pedalo2.PedaloId, StartDate = new DateTime(2016, 7, 25, 16, 45, 00), EndDate = null });
+            
             context.SaveChanges();
         }
     }

@@ -1,24 +1,25 @@
-﻿namespace PedaloWebApp.Pages.Customers
+namespace PedaloWebApp.Pages.Pedaloes
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using PedaloWebApp.Core.Domain.Entities;
     using PedaloWebApp.Core.Interfaces.Data;
 
-    public class EditModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly IDbContextFactory contextFactory;
 
-        public EditModel(IDbContextFactory contextFactory)
+        public DeleteModel(IDbContextFactory contextFactory)
         {
             this.contextFactory = contextFactory;
         }
 
         [BindProperty]
-        public CustomerEditModel Customer { get; set; }
+        public PedaloDeleteModel Pedalo { get; set; }
 
         public IActionResult OnGet(Guid? id)
         {
@@ -28,18 +29,19 @@
             }
 
             using var context = this.contextFactory.CreateReadOnlyContext();
-            this.Customer = context.Customers
-                .Where(m => m.CustomerId == id)
-                .Select(x => new CustomerEditModel
+            this.Pedalo = context.Pedaloes
+                .Where(m => m.PedaloId == id)
+                .Select(x => new PedaloDeleteModel
                 {
-                    CustomerId = x.CustomerId,
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    BirthdayDate = x.BirthdayDate,
+                    PedaloId = x.PedaloId,
+                    Name = x.Name,
+                    Color = x.Color,
+                    Capacity = x.Capacity,
+                    HourlyRate = x.HourlyRate,
+                    NumberOfBookings = x.Bookings.Count,
                 })
                 .FirstOrDefault();
-
-            if (this.Customer == null)
+            if (this.Pedalo == null)
             {
                 return this.NotFound();
             }
@@ -55,17 +57,15 @@
             }
 
             using var context = this.contextFactory.CreateContext();
-            var customer = context.Customers.FirstOrDefault(x => x.CustomerId == this.Customer.CustomerId);
-            if (customer == null)
+            var pedalo = context.Pedaloes.FirstOrDefault(x => x.PedaloId == this.Pedalo.PedaloId);
+            if (pedalo == null)
             {
                 return this.NotFound();
             }
 
             try
             {
-                customer.FirstName = this.Customer.FirstName;
-                customer.LastName = this.Customer.LastName;
-                customer.BirthdayDate = this.Customer.BirthdayDate;
+                context.Pedaloes.Remove(pedalo);
 
                 context.SaveChanges();
             }
@@ -78,12 +78,14 @@
         }
     }
 
-    public class CustomerEditModel
+    public class PedaloDeleteModel
     {
-        public Guid CustomerId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateTime BirthdayDate { get; set; }
-        public List<Customer> Customers { get; internal set; }
+        public Guid PedaloId { get; set; }
+        public string Name { get; set; }
+        public PedaloColor Color { get; set; }
+        public int Capacity { get; set; }
+        public decimal HourlyRate { get; set; }
+
+        public int? NumberOfBookings { get; set; }
     }
 }
