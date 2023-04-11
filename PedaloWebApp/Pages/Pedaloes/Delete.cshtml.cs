@@ -86,6 +86,6 @@ namespace PedaloWebApp.Pages.Pedaloes
         public int Capacity { get; set; }
         public decimal HourlyRate { get; set; }
 
-        public int? NumberOfBookings { get; set; }
+        public int NumberOfBookings { get; set; }
     }
 }

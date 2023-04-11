@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <input asp-for="Pedalo.PedaloId" type="hidden" />
-                @if (Model.Pedalo.NumberOfBookings == null)
+                @if (Model.Pedalo.NumberOfBookings == 0)
                 {
                     <input type="submit" value="Delete" class="btn btn-primary" enabled />
                 }
