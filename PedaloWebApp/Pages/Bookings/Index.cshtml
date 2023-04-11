@@ -39,6 +39,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.EndDate)
                 </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.BookingId">Edit</a>
+                </td>
             </tr>
         }
     </tbody>
