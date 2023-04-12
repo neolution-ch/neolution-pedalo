@@ -2,7 +2,9 @@ namespace PedaloWebApp.Pages.Pedaloes
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Xml.Linq;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using PedaloWebApp.Core.Domain.Entities;
@@ -84,9 +86,17 @@ namespace PedaloWebApp.Pages.Pedaloes
     public class PedaloEditModel
     {
         public Guid PedaloId { get; set; }
+
+        [Display(Name = "Name")]
         public string Name { get; set; }
+
+        [Display(Name = "Color")]
         public PedaloColor Color { get; set; }
+
+        [Display(Name = "Capacity")]
         public int Capacity { get; set; }
+
+        [Display(Name = "Hourly Rate")]
         public decimal HourlyRate { get; set; }
     }
 }

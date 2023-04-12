@@ -50,8 +50,8 @@ namespace PedaloWebApp.Pages.Bookings
                     Customer = x.Customer,
                 })
                 .FirstOrDefault();
-            this.Pedalo = context.Pedaloes.ToList();
-            this.Customer = context.Customers.ToList();
+            this.Pedalo = context.Pedaloes.OrderBy(x => x.Name).ToList();
+            this.Customer = context.Customers.OrderBy(x => x.FirstName).ToList();
 
 
             return this.Page();
@@ -96,8 +96,11 @@ namespace PedaloWebApp.Pages.Bookings
         public Guid BookingId { get; set; }
         public Guid CustomerId { get; set; }
         public Guid PedaloId { get; set; }
+
+        [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
 
+        [Display(Name = "End Date")]
         public DateTime? EndDate { get; set; }
         public Pedalo Pedalo { get; set; }
         public Customer Customer { get; set; }

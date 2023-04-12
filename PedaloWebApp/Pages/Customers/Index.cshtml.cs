@@ -21,7 +21,7 @@
         public IActionResult OnGet()
         {
             using var context = this.contextFactory.CreateReadOnlyContext();
-            this.Customers = context.Customers.ToList();
+            this.Customers = context.Customers.OrderBy(x => x.FirstName).ToList();
             return this.Page();
         }
     }

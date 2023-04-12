@@ -23,7 +23,7 @@
         {
             using var context = this.contextFactory.CreateReadOnlyContext();
             this.Bookings = context.Bookings
-                .Include(x => x.Customer)
+                .Include(x => x.Customer).OrderBy(x => x.StartDate)
                 .Include(x => x.Pedalo)
                 .ToList();
             return this.Page();

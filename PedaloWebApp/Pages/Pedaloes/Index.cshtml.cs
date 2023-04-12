@@ -21,7 +21,7 @@
         public IActionResult OnGet()
         {
             using var context = this.contextFactory.CreateReadOnlyContext();
-            this.Pedaloes = context.Pedaloes.ToList();
+            this.Pedaloes = context.Pedaloes.OrderBy(x => x.Name).ToList();
             return this.Page();
         }
     }

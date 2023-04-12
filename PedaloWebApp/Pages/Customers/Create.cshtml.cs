@@ -60,10 +60,15 @@ namespace PedaloWebApp.Pages.Customers
     public class CustomerCreateModel
     {
         public Guid CustomerId { get; set; }
+
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "Birthday Date")]
         public DateTime BirthdayDate { get; set; }
     }
 }
