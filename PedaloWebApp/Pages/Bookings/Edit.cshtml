@@ -13,7 +13,7 @@
     <div class="col-md-4">
         <form method="post">
             <div class="form-group">
-                <label asp-for="Booking.CustomerId" class="control-label"></label>
+                <label asp-for="Booking.Customer" class="control-label"></label>
                 <select asp-for="Booking.CustomerId" class="form-control">
                     @foreach (var item in Model.Customer)
                     {
@@ -24,7 +24,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.PedaloId" class="control-label"></label>
+                <label asp-for="Booking.Pedalo" class="control-label"></label>
                 <select asp-for="Booking.PedaloId" class="form-control">
                     @foreach (var item in Model.Pedalo)
                     {
