@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.Customers[0].LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customers[0].BirthdayDate)
+                @Html.DisplayNameFor(model => model.Customers[0].BirthdayDate.Date)
             </th>
             <th></th>
             <th></th>
@@ -33,7 +33,7 @@
                     @Html.DisplayFor(modelItem => item.LastName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BirthdayDate)
+                    @item.BirthdayDate.ToString("yyyy-MM-dd")
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.CustomerId">Edit</a>

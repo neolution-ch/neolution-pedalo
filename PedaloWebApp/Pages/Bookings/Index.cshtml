@@ -36,10 +36,10 @@
                     @Html.DisplayFor(modelItem => item.Pedalo.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
+                    @item.StartDate.ToString("yyyy-MM-dd HH:mm:ss")
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
+                    @(item.EndDate != null ? item.EndDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : "n/a")
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.BookingId">Edit</a>
