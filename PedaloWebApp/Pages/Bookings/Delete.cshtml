@@ -13,19 +13,33 @@
         <form method="post">
             <div class="form-group">
                 <label asp-for="Booking.Customer" class="control-label"></label>
-                <input asp-for="Booking.CustomerId" class="form-control" disabled>
+                <select asp-for="Booking.CustomerId" class="form-control" disabled>
+                    @foreach (var item in Model.Customer)
+                    {
+                        <option value="@item.CustomerId">
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.Pedalo" class="control-label"></label>
-                <input asp-for="Booking.PedaloId" class="form-control" disabled>
+                <select asp-for="Booking.PedaloId" class="form-control" disabled>
+                    @foreach (var item in Model.Pedalo)
+                    {
+                        <option value="@item.PedaloId">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.StartDate" class="control-label"></label>
-                <input asp-for="Booking.StartDate" class="form-control" />
+                <input asp-for="Booking.StartDate" class="form-control" disabled/>
             </div>
             <div class="form-group">
                 <label asp-for="Booking.EndDate" class="control-label"></label>
-                <input asp-for="Booking.EndDate" class="form-control" />
+                <input asp-for="Booking.EndDate" class="form-control" disabled/>
             </div>
             <div class="form-group">
                 <input asp-for="Booking.BookingId" type="hidden" />
