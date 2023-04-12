@@ -63,7 +63,7 @@ namespace PedaloWebApp.Pages.Customers
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime BirthdayDate { get; set; }
     }
 }

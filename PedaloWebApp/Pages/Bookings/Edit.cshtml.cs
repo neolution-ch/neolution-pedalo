@@ -96,11 +96,8 @@ namespace PedaloWebApp.Pages.Bookings
         public Guid BookingId { get; set; }
         public Guid CustomerId { get; set; }
         public Guid PedaloId { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime? EndDate { get; set; }
         public Pedalo Pedalo { get; set; }
         public Customer Customer { get; set; }
