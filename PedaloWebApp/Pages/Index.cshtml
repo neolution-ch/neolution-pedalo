@@ -5,6 +5,31 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Dashboard</h1>
 </div>
+<div>
+    <a asp-page="/Bookings/Create" class="btn btn-primary">Quick Create Booking</a>
+</div>
+
+<div style="border:1px solid black;"> <!--Placeholder to see how big the container is -->
+    <h2 style="text-align:center;">Most Popular Pedaloes</h2>
+    <div style="display:flex;justify-content:space-around;">
+        @foreach (var pedalo in Model.PopularPedaloes)
+        {
+            <div style="border: 15px solid @pedalo.Color;border-radius:50%;width:150px;height:150px;text-align:center;display:inline-block;margin-right:10px;">
+                <div style="display:flex;justify-content:center;align-items:center;height:100%;">
+                    <p style="font-size:30px;color:black;margin:0;">@pedalo.BookingsCount</p>
+                </div>
+            </div>
+        }
+    </div>
+    <div style="display:flex;justify-content:space-around;">
+        @foreach (var pedalo in Model.PopularPedaloes)
+        {
+            <div style="text-align:center;font-weight:bold;font-size:15px;">
+                <span>@pedalo.Name</span>
+            </div>
+        }
+    </div>
+</div>
+
