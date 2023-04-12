@@ -1,0 +1,55 @@
+﻿@page
+@using PedaloWebApp.Core.Domain.Entities;
+@model PedaloWebApp.Pages.Bookings.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Bookings</h4>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Booking.CustomerId" class="control-label"></label>
+                <select asp-for="Booking.CustomerId" class="form-control">
+                    @foreach (var item in Model.Customer)
+                    {
+                        <option value="@item.CustomerId">
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.PedaloId" class="control-label"></label>
+                <select asp-for="Booking.PedaloId" class="form-control">
+                    @foreach (var item in Model.Pedalo)
+                    {
+                        <option value="@item.PedaloId">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.StartDate" class="control-label"></label>
+                <input asp-for="Booking.StartDate" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.EndDate" class="control-label"></label>
+                <input asp-for="Booking.EndDate" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input asp-for="Booking" type="hidden" />
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>

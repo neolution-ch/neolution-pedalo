@@ -1,5 +1,6 @@
 ﻿namespace PedaloWebApp.Core.Domain.Entities
 {
+    using Microsoft.EntityFrameworkCore;
     using System;
 
     public class Booking

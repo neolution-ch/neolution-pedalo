@@ -116,6 +116,15 @@
                 HourlyRate = 17.00m,
             };
             context.Pedaloes.Add(pedalo3);
+
+            var pedalo4 = new Pedalo
+            {
+                Name = "Flying Dutchman",
+                Capacity = 4,
+                Color = PedaloColor.Green,
+                HourlyRate = 17.00m,
+            };
+            context.Pedaloes.Add(pedalo4);
             context.SaveChanges();
 
             context.Bookings.Add(new Booking { CustomerId = customer1.CustomerId, PedaloId = pedalo2.PedaloId, StartDate = new DateTime(2016, 7, 25, 09, 30, 00), EndDate = new DateTime(2016, 7, 25, 10, 30, 00) });
