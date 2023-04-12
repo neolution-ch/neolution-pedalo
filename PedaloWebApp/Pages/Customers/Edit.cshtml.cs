@@ -2,7 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics;
     using System.Linq;
+    using System.Xml.Linq;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using PedaloWebApp.Core.Domain.Entities;
@@ -81,9 +84,16 @@
     public class CustomerEditModel
     {
         public Guid CustomerId { get; set; }
+
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [Display(Name = "Birthday Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime BirthdayDate { get; set; }
-        public List<Customer> Customers { get; internal set; }
     }
 }

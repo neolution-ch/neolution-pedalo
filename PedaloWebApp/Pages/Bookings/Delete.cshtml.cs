@@ -6,34 +6,50 @@ namespace PedaloWebApp.Pages.Bookings
     using System.Linq;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
-    using Microsoft.EntityFrameworkCore;
     using PedaloWebApp.Core.Domain.Entities;
     using PedaloWebApp.Core.Interfaces.Data;
-    using PedaloWebApp.Pages.Customers;
 
-    public class CreateModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly IDbContextFactory contextFactory;
 
-        public CreateModel(IDbContextFactory contextFactory)
+        public DeleteModel(IDbContextFactory contextFactory)
         {
             this.contextFactory = contextFactory;
         }
 
         [BindProperty]
-        public BookingCreateModel Booking { get; set; }
+        public BookingDeleteModel Booking { get; set; }
 
-        [BindProperty]
-        public List<Pedalo> Pedalo { get; set; }
-
-        [BindProperty]
-        public List<Customer> Customer { get; set; }
-
-        public IActionResult OnGet()
+        public IActionResult OnGet(Guid? id)
         {
-            using var context = this.contextFactory.CreateContext();
-            this.Pedalo = context.Pedaloes.OrderBy(x => x.Name).ToList();
-            this.Customer = context.Customers.OrderBy(x => x.FirstName).ToList();
+            if (id == null)
+            {
+                return this.BadRequest();
+            }
+
+
+
+            using var context = this.contextFactory.CreateReadOnlyContext();
+            this.Booking = context.Bookings
+            .Where(m => m.BookingId == id)
+            .Select(x => new BookingDeleteModel
+            {
+                BookingId = x.BookingId,
+                CustomerId = x.CustomerId,
+                PedaloId = x.PedaloId,
+                StartDate = x.StartDate,
+                EndDate = x.EndDate,
+                Pedalo = x.Pedalo,
+                Customer = x.Customer,
+            })
+            .FirstOrDefault();
+
+            if (this.Booking == null)
+            {
+                return this.NotFound();
+            }
+
             return this.Page();
         }
 
@@ -45,18 +61,16 @@ namespace PedaloWebApp.Pages.Bookings
             }
 
             using var context = this.contextFactory.CreateContext();
-            var booking = new Booking
+            var booking = context.Bookings.FirstOrDefault(x => x.BookingId == this.Booking.BookingId);
+            if (booking == null)
             {
-                BookingId = Guid.NewGuid(),
-                CustomerId = this.Booking.CustomerId,
-                PedaloId = this.Booking.PedaloId,
-                StartDate = this.Booking.StartDate,
-                EndDate = this.Booking.EndDate,
-            };
+                return this.NotFound();
+            }
 
             try
             {
-                context.Bookings.Add(booking);
+                context.Bookings.Remove(booking);
+
                 context.SaveChanges();
             }
             catch (Exception)
@@ -66,10 +80,9 @@ namespace PedaloWebApp.Pages.Bookings
 
             return this.RedirectToPage("./Index");
         }
-
     }
 
-    public class BookingCreateModel
+    public class BookingDeleteModel
     {
         public Guid BookingId { get; set; }
         public Guid CustomerId { get; set; }
@@ -82,6 +95,5 @@ namespace PedaloWebApp.Pages.Bookings
         public DateTime? EndDate { get; set; }
         public Pedalo Pedalo { get; set; }
         public Customer Customer { get; set; }
-
     }
 }

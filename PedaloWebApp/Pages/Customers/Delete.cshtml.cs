@@ -2,6 +2,7 @@ namespace PedaloWebApp.Pages.Customers
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -81,6 +82,8 @@ namespace PedaloWebApp.Pages.Customers
         public Guid CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime BirthdayDate { get; set; }
         public List<Customer> Customers { get; internal set; }
 
