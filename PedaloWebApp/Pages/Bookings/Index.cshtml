@@ -21,6 +21,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.Bookings[0].EndDate)
             </th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -41,6 +43,9 @@
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.BookingId">Edit</a>
+                </td>
+                <td>
+                    <a asp-page="./Delete" asp-route-id="@item.BookingId">Delete</a>
                 </td>
             </tr>
         }
