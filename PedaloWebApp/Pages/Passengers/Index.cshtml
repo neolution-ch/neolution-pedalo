@@ -1,0 +1,42 @@
+﻿@page
+@model PedaloWebApp.Pages.Passengers.IndexModel
+@{
+    ViewData["Title"] = "Passengers";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("First Name")
+            </th>
+            <th>
+                @Html.DisplayName("Last Name")
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Passengers)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.PassengerId">Edit</a>
+                </td>
+                <td>
+                    <a asp-page="./Delete" asp-route-id="@item.PassengerId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-page="./Create" asp-route-id="PassengerId">Create</a>

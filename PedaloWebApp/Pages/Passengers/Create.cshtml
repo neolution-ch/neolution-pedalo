@@ -1,5 +1,4 @@
 ﻿@page
-@using PedaloWebApp.Core.Domain.Entities;
 @model PedaloWebApp.Pages.Passengers.CreateModel
 @{
     ViewData["Title"] = "Create";
@@ -9,7 +8,6 @@
 
 <h4>Passengers</h4>
 
-<!-- Logik, dass es so viele Felder hat wie Kapazität implementieren -->
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -30,6 +28,5 @@
 </div>
 
 <div>
-    <!-- Zurückleiten auf Buchung erstellen-->
     <a asp-page="Index">Back to List</a>
 </div>

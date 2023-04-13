@@ -8,6 +8,7 @@ namespace PedaloWebApp.Pages.Passengers
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using PedaloWebApp.Core.Domain.Entities;
     using PedaloWebApp.Core.Interfaces.Data;
+    using PedaloWebApp.Pages.Bookings;
 
     public class CreateModel : PageModel
     {
@@ -52,7 +53,7 @@ namespace PedaloWebApp.Pages.Passengers
                 return this.RedirectToPage("/Error");
             }
 
-            return this.RedirectToPage("Bookings/Index");
+            return this.RedirectToPage("./Index");
         }
     }
 
