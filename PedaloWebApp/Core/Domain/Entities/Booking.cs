@@ -2,6 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using System;
+    using System.Collections.Generic;
 
     public class Booking
     {
@@ -13,5 +14,7 @@
 
         public Pedalo Pedalo { get; set; }
         public Customer Customer { get; set; }
+
+        public ICollection<BookingPassengers> BookingPassengers { get; set; }
     }
 }
