@@ -1,8 +1,10 @@
 ﻿namespace PedaloWebApp.Pages
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Logging;
     using PedaloWebApp.Core.Domain.Entities;
     using PedaloWebApp.Core.Interfaces.Data;
@@ -19,6 +21,7 @@
         }
 
         public List<PopularPedaloViewModel> PopularPedaloes { get; set; }
+        public List<CustomerBookingViewModel> TopCustomers { get; set; }
 
         public void OnGet()
         {
@@ -35,6 +38,22 @@
                     BookingsCount = p.Bookings.Count
                 })
                 .ToList();
+
+            // Get the top 5 customers with the most bookings
+            this.TopCustomers = context.Customers
+                .Include(c => c.Bookings)
+            .OrderByDescending(c => c.Bookings.Count)
+            .Take(5)
+            .AsEnumerable() //switch to client-side evaluation
+            .Select((c, index) => new CustomerBookingViewModel
+            {
+                Rank = index + 1,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                BookingsCustomerCount = c.Bookings.Count
+            })
+            .ToList();
+            
         }
     }
 
@@ -43,6 +62,14 @@
         public string Name { get; set; }
         public string Color { get; set; }
         public int BookingsCount { get; set; }
+    }
+
+    public class CustomerBookingViewModel
+    {
+        public int Rank { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int BookingsCustomerCount { get; set; }
     }
 }
 

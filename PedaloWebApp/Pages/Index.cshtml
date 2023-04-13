@@ -7,9 +7,6 @@
 <div class="text-center">
     <h1 class="display-4">Dashboard</h1>
 </div>
-<div>
-    <a asp-page="/Bookings/Create" class="btn btn-primary">Quick Create Booking</a>
-</div>
 
 <div style="border:1px solid black;"> <!--Placeholder to see how big the container is -->
     <h2 style="text-align:center;">Most Popular Pedaloes</h2>
@@ -30,6 +27,37 @@
                 <span>@pedalo.Name</span>
             </div>
         }
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Bookings/Create" class="btn btn-primary">Quick Create Booking</a>
+</div>
+
+<div style="border:1px solid black;"> <!--Placeholder to see how big the container is -->
+    <h2>Business' Highest-Grossing Customers</h2>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Bookings</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model.TopCustomers)
+                {
+                    <tr>
+                        <th scope="row">@customer.Rank</th>
+                        <td>@customer.FirstName</td>
+                        <td>@customer.LastName</td>
+                        <td>@customer.BookingsCustomerCount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
 
