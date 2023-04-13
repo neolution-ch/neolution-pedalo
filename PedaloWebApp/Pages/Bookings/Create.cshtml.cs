@@ -82,6 +82,5 @@ namespace PedaloWebApp.Pages.Bookings
         public DateTime? EndDate { get; set; }
         public Pedalo Pedalo { get; set; }
         public Customer Customer { get; set; }
-
     }
 }
