@@ -36,6 +36,7 @@ namespace PedaloWebApp.Pages.Passengers
                     PassengerId = x.PassengerId,
                     FirstName = x.FirstName,
                     LastName = x.LastName,
+                    NumberOfBookings = x.BookingPassengers.Count,
                 })
                 .FirstOrDefault();
             if (this.Passenger == null)
@@ -55,7 +56,7 @@ namespace PedaloWebApp.Pages.Passengers
 
             using var context = this.contextFactory.CreateContext();
             var passenger = context.Passengers.FirstOrDefault(x => x.PassengerId == this.Passenger.PassengerId);
-            if (pass$ == null)
+            if (passenger == null)
             {
                 return this.NotFound();
             }
@@ -84,5 +85,7 @@ namespace PedaloWebApp.Pages.Passengers
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        public int? NumberOfBookings { get; set; }
     }
 }
