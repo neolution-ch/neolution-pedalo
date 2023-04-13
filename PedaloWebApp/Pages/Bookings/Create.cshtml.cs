@@ -64,7 +64,11 @@ namespace PedaloWebApp.Pages.Bookings
                 return this.RedirectToPage("/Error");
             }
 
-            return this.RedirectToPage("./Index");
+            // Get the Pedalo object based on the PedaloId property of the Booking object
+            var pedalo = context.Pedaloes.FirstOrDefault(p => p.PedaloId == this.Booking.PedaloId);
+
+            // Redirect to the Add page for Passengers
+            return this.RedirectToPage("/Bookings/AddPassenger", new { bookingId = booking.BookingId, capacity = pedalo.Capacity });
         }
 
     }
