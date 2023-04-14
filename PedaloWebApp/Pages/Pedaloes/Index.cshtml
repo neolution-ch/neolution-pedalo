@@ -4,8 +4,12 @@
     ViewData["Title"] = "Pedaloes";
 }
 
-    <h1>@ViewData["Title"]</h1>
-
+<h1>@ViewData["Title"]</h1>
+<br />
+<div>
+    <a asp-page="./Create" asp-route-id="PedaloId" class="btn btn-primary btn-lg btn-block">Create</a>
+</div>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -41,13 +45,12 @@
                 @Html.DisplayFor(modelItem => item.HourlyRate)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.PedaloId">Edit</a>
+                <a asp-page="./Edit" asp-route-id="@item.PedaloId" class="btn btn-outline-warning">Edit</a>
             </td>
             <td>
-                <a asp-page="./Delete" asp-route-id="@item.PedaloId">Delete</a>
+                <a asp-page="./Delete" asp-route-id="@item.PedaloId" class="btn btn-outline-danger">Delete</a>
             </td>
         </tr>
     }
     </tbody>
 </table>
-<a asp-page="./Create" asp-route-id="PedaloId">Create</a>

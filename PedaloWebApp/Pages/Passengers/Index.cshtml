@@ -5,7 +5,11 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-
+<br />
+<div>
+    <a asp-page="./Create" asp-route-id="PassengerId" class="btn btn-primary btn-lg btn-block">Create</a>
+</div>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -30,13 +34,12 @@
                     @Html.DisplayFor(modelItem => item.LastName)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.PassengerId">Edit</a>
+                    <a asp-page="./Edit" asp-route-id="@item.PassengerId" class="btn btn-outline-warning">Edit</a>
                 </td>
                 <td>
-                    <a asp-page="./Delete" asp-route-id="@item.PassengerId">Delete</a>
+                    <a asp-page="./Delete" asp-route-id="@item.PassengerId" class="btn btn-outline-danger">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<a asp-page="./Create" asp-route-id="PassengerId">Create</a>

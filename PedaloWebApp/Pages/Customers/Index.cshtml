@@ -5,7 +5,11 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-
+<br />
+<div>
+    <a asp-page="./Create" asp-route-id="CustomerId" class="btn btn-primary btn-lg btn-block">Create</a>
+</div>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -33,16 +37,15 @@
                     @Html.DisplayFor(modelItem => item.LastName)
                 </td>
                 <td>
-                    @item.BirthdayDate.ToString("yyyy-MM-dd")
+                    @item.BirthdayDate.ToString("dd.MM.yyyy")
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.CustomerId">Edit</a>
+                    <a asp-page="./Edit" asp-route-id="@item.CustomerId" class="btn btn-outline-warning">Edit</a>
                 </td>
                 <td>
-                    <a asp-page="./Delete" asp-route-id="@item.CustomerId">Delete</a>
+                    <a asp-page="./Delete" asp-route-id="@item.CustomerId" class="btn btn-outline-danger">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<a asp-page="./Create" asp-route-id="CustomerId">Create</a>

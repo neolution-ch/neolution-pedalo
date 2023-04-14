@@ -5,7 +5,11 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-
+<br />
+<div>
+    <a asp-page="./Create" asp-route-id="BookingId" class="btn btn-primary btn-lg btn-block">Create</a>
+</div>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -20,6 +24,9 @@
             </th>
             <th>
                 @Html.DisplayName("End Date")
+            </th>
+            <th>
+                @Html.DisplayName("Passengers")
             </th>
             <th></th>
             <th></th>
@@ -36,22 +43,21 @@
                     @Html.DisplayFor(modelItem => item.Pedalo.Name)
                 </td>
                 <td>
-                    @item.StartDate.ToString("yyyy-MM-dd HH:mm:ss")
+                    @item.StartDate.ToString("dd.MM.yyyy HH:mm")
                 </td>
                 <td>
-                    @(item.EndDate != null ? item.EndDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : "n/a")
+                    @(item.EndDate != null ? item.EndDate.Value.ToString("dd.MM.yyyy HH:mm") : "n/a")
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.BookingId">Edit</a>
+                    @item.BookingPassengers.Count
                 </td>
                 <td>
-                    <a asp-page="./Delete" asp-route-id="@item.BookingId">Delete</a>
+                    <a asp-page="./Edit" asp-route-id="@item.BookingId" class="btn btn-outline-warning">Edit</a>
+                </td>
+                <td>
+                    <a asp-page="./Delete" asp-route-id="@item.BookingId" class="btn btn-outline-danger">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<div>
-    <a asp-page="./Create" asp-route-id="BookingId">Create</a>
-    <br />
-</div>
