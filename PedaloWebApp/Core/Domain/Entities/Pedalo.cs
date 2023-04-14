@@ -21,5 +21,10 @@
         Pink,
         Green,
         Yellow,
+        Black,
+        Turquoise,
+        Beige,
+        Olive,
+        Grey
     }
 }
