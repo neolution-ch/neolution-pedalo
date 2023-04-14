@@ -26,6 +26,15 @@
                 .Include(x => x.Customer).OrderBy(x => x.StartDate)
                 .Include(x => x.Pedalo)
                 .ToList();
+
+            // load the passengers for each booking
+            foreach (var booking in this.Bookings)
+            {
+                booking.BookingPassengers = context.BookingPassengers
+                    .Where(x => x.BookingId == booking.BookingId)
+                    .ToList();
+            }
+
             return this.Page();
         }
     }
