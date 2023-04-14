@@ -9,13 +9,22 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style> 
+        * {
+            font-family: 'MV Boli', 'Arial';
+            font-weight: bold;
+        }
 
+        table {
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Pedalo</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index" style="font-family:'MV Boli'; font-weight:bold; font-size: 25px;">Pedalo</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,19 +32,19 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index" style="font-family:'MV Boli'; font-weight:bold; font-size: 18px;">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Pedaloes/Index">Pedaloes</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Pedaloes/Index" style="font-family:'MV Boli'; font-weight:bold; font-size: 18px;">Pedaloes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Customers/Index">Customers</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Customers/Index" style="font-family:'MV Boli'; font-weight:bold; font-size: 18px;">Customers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Bookings/Index">Bookings</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Bookings/Index" style="font-family:'MV Boli'; font-weight:bold; font-size: 18px;">Bookings</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Passengers/Index">Passengers</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Passengers/Index" style="font-family:'MV Boli'; font-weight:bold; font-size: 18px;">Passengers</a>
                         </li>
                     </ul>
                 </div>
@@ -49,9 +58,9 @@
     </div>
     <br />
     <br />
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="background-color:white;">
         <div class="container">
-            &copy; 2020 - Pedalo Verleih
+            &copy; 2023 - RentAPedalo
         </div>
     </footer>
 
