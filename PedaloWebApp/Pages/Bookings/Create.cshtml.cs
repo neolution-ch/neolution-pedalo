@@ -68,7 +68,7 @@ namespace PedaloWebApp.Pages.Bookings
             var pedalo = context.Pedaloes.FirstOrDefault(p => p.PedaloId == this.Booking.PedaloId);
 
             // Redirect to the Add page for Passengers
-            return this.RedirectToPage("/Bookings/AddPassenger", new { bookingId = booking.BookingId, capacity = pedalo.Capacity });
+            return this.RedirectToPage("/Bookings/AddPassenger", new { bookingId = booking.BookingId, capacity = pedalo.Capacity, customer = booking.CustomerId });
         }
 
     }

@@ -73,6 +73,8 @@ namespace PedaloWebApp.Pages.Bookings
 
             try
             {
+                //Remove Entry in Table BookingPassengers with this BookingId (Foreign Key in BookingPassengers)
+                context.BookingPassengers.RemoveRange(booking.BookingPassengers);
                 context.Bookings.Remove(booking);
                 context.SaveChanges();
             }
@@ -99,6 +101,5 @@ namespace PedaloWebApp.Pages.Bookings
         public DateTime? EndDate { get; set; }
         public Pedalo Pedalo { get; set; }
         public Customer Customer { get; set; }
-
     }
 }

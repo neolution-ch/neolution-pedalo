@@ -121,21 +121,74 @@
             {
                 Name = "Flying Dutchman",
                 Capacity = 4,
-                Color = PedaloColor.Green,
+                Color = PedaloColor.Olive,
                 HourlyRate = 17.00m,
             };
             context.Pedaloes.Add(pedalo4);
+
+            var pedalo5 = new Pedalo
+            {
+                Name = "Black Pearl",
+                Capacity = 7,
+                Color = PedaloColor.Black,
+                HourlyRate = 13.00m,
+            };
+            context.Pedaloes.Add(pedalo5);
+
+            var pedalo6 = new Pedalo
+            {
+                Name = "Wicked Wench",
+                Capacity = 5,
+                Color = PedaloColor.Grey,
+                HourlyRate = 21.00m,
+            };
+            context.Pedaloes.Add(pedalo6);
+            context.SaveChanges();
+
+            var passenger1 = new Passenger
+            {
+                FirstName = "Orion",
+                LastName = "Raventor",
+            };
+            context.Passengers.Add(passenger1);
+
+            var passenger2 = new Passenger
+            {
+                FirstName = "Addison",
+                LastName = "Smith",
+            };
+            context.Passengers.Add(passenger2);
+            
+            var passenger3 = new Passenger
+            {
+                FirstName = "Caden",
+                LastName = "Edwards",
+            };
+            context.Passengers.Add(passenger3);
+            
+            var passenger4 = new Passenger
+            {
+                FirstName = "Rachel",
+                LastName = "Hall",
+            };
+            context.Passengers.Add(passenger4);
+            
+            var passenger5 = new Passenger
+            {
+                FirstName = "Sasha",
+                LastName = "Bailey",
+            };
+            context.Passengers.Add(passenger5);
+
             context.SaveChanges();
 
             context.Bookings.Add(new Booking { CustomerId = customer1.CustomerId, PedaloId = pedalo2.PedaloId, StartDate = new DateTime(2016, 7, 25, 09, 30, 00), EndDate = new DateTime(2016, 7, 25, 10, 30, 00) });
-            context.Bookings.Add(new Booking { CustomerId = customer2.CustomerId, PedaloId = pedalo1.PedaloId, StartDate = new DateTime(2016, 7, 25, 10, 10, 00), EndDate = new DateTime(2016, 7, 25, 10, 50, 00) });
             context.Bookings.Add(new Booking { CustomerId = customer3.CustomerId, PedaloId = pedalo3.PedaloId, StartDate = new DateTime(2016, 7, 25, 11, 00, 00), EndDate = new DateTime(2016, 7, 25, 12, 10, 00) });
-            context.Bookings.Add(new Booking { CustomerId = customer4.CustomerId, PedaloId = pedalo2.PedaloId, StartDate = new DateTime(2016, 7, 25, 12, 15, 00), EndDate = new DateTime(2016, 7, 25, 13, 00, 00) });
+            context.Bookings.Add(new Booking { CustomerId = customer4.CustomerId, PedaloId = pedalo4.PedaloId, StartDate = new DateTime(2016, 7, 25, 12, 15, 00), EndDate = new DateTime(2016, 7, 25, 13, 00, 00) });
             context.Bookings.Add(new Booking { CustomerId = customer5.CustomerId, PedaloId = pedalo3.PedaloId, StartDate = new DateTime(2016, 7, 25, 12, 25, 00), EndDate = new DateTime(2016, 7, 25, 13, 05, 00) });
-            context.Bookings.Add(new Booking { CustomerId = customer6.CustomerId, PedaloId = pedalo3.PedaloId, StartDate = new DateTime(2016, 7, 25, 13, 10, 00), EndDate = new DateTime(2016, 7, 25, 14, 30, 00) });
-            context.Bookings.Add(new Booking { CustomerId = customer6.CustomerId, PedaloId = pedalo1.PedaloId, StartDate = new DateTime(2016, 7, 25, 15, 05, 00), EndDate = new DateTime(2016, 7, 25, 15, 55, 00) });
+            context.Bookings.Add(new Booking { CustomerId = customer6.CustomerId, PedaloId = pedalo6.PedaloId, StartDate = new DateTime(2016, 7, 25, 15, 05, 00), EndDate = new DateTime(2016, 7, 25, 15, 55, 00) });
             context.Bookings.Add(new Booking { CustomerId = customer7.CustomerId, PedaloId = pedalo1.PedaloId, StartDate = new DateTime(2016, 7, 25, 16, 20, 00), EndDate = new DateTime(2016, 7, 25, 17, 05, 00) });
-            context.Bookings.Add(new Booking { CustomerId = customer2.CustomerId, PedaloId = pedalo3.PedaloId, StartDate = new DateTime(2016, 7, 25, 16, 30, 00), EndDate = new DateTime(2016, 7, 25, 17, 30, 00) });
+            context.Bookings.Add(new Booking { CustomerId = customer2.CustomerId, PedaloId = pedalo5.PedaloId, StartDate = new DateTime(2016, 7, 25, 16, 30, 00), EndDate = new DateTime(2016, 7, 25, 17, 30, 00) });
             
             context.SaveChanges();
         }
