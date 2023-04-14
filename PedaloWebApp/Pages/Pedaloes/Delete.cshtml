@@ -31,11 +31,11 @@
                 <input asp-for="Pedalo.PedaloId" type="hidden" />
                 @if (Model.Pedalo.NumberOfBookings == 0)
                 {
-                    <input type="submit" value="Delete" class="btn btn-primary" enabled />
+                    <input type="submit" value="Delete" class="btn btn-danger" enabled />
                 }
                 else
                 {
-                    <input type="submit" value="Delete" class="btn btn-primary" disabled />
+                    <input type="submit" value="Delete" class="btn btn-danger" disabled />
                 }
             </div>
         </form>
