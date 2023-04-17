@@ -25,11 +25,12 @@ namespace PedaloWebApp.Pages.Bookings
         [BindProperty(SupportsGet = true)]
         public Guid BookingId { get; set; }
 
-        [BindProperty(SupportsGet = true)]
+        [BindProperty]
         public int Capacity { get; set; }
 
-        [BindProperty(SupportsGet = true)]
-        public Guid CustomerId { get; set; }
+        [BindProperty]
+        [Display(Name = "Customer")]
+        public String FirstName { get; set; }
 
         [BindProperty]
         public List<Passenger> Passenger { get; set; }
@@ -38,17 +39,27 @@ namespace PedaloWebApp.Pages.Bookings
         public BookingAddPassengerModel AddPassenger { get; set; }
 
         [BindProperty]
-        public Guid?[] PassengerId { get; set; }
+        public Guid[] PassengerId { get; set; }
 
         public IActionResult OnGet()
         {
+            using var context = this.contextFactory.CreateContext();
+            this.Passenger = context.Passengers.OrderBy(x => x.FirstName).ToList();
+
+            var booking = context.Bookings.FirstOrDefault(x => x.BookingId == this.BookingId);
+            var pedalo = context.Pedaloes.FirstOrDefault(x => x.PedaloId == booking.PedaloId);
+            var capacity = pedalo.Capacity;
+            Capacity = capacity;
+
             if (this.Capacity <= 1)
             {
                 return this.RedirectToPage("/Bookings/Index");
             }
 
-            using var context = this.contextFactory.CreateContext();
-            this.Passenger = context.Passengers.OrderBy(x => x.FirstName).ToList();
+            var customer = context.Customers.FirstOrDefault(x => x.CustomerId == booking.CustomerId);
+            var firstname = customer.FirstName;
+            FirstName = firstname;
+
             return this.Page();
         }
 
@@ -62,24 +73,14 @@ namespace PedaloWebApp.Pages.Bookings
             using var context = this.contextFactory.CreateContext();
             //For-Each Schleife, damit alle PassengerIds gespeichert werden
             //LOOP FIXEN FÜR ÜBERPRÜFUNG
-            int y = 0;
-            while (y < Capacity -1)
+            foreach (var item in PassengerId)
             {
-                foreach (var item in PassengerId)
+                var passenger = new BookingPassengers
                 {
-                    if (item != null)
-                    {
-                        var passenger = new BookingPassengers
-                        {
-                            BookingPassengersId = Guid.NewGuid(),
-                            PassengerId = item.Value,
-                            BookingId = this.BookingId
-                        };
-
-                        context.BookingPassengers.Add(passenger);
-                    }
-                }
-                y++;
+                    BookingId = this.BookingId,
+                    PassengerId = item,
+                };
+                context.BookingPassengers.Add(passenger);
             }
 
             try
