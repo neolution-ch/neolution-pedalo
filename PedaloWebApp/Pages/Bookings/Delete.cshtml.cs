@@ -71,17 +71,22 @@ namespace PedaloWebApp.Pages.Bookings
                 return this.NotFound();
             }
 
-            try
+            //Remove Entry in Table BookingPassengers with this BookingId (Foreign Key in BookingPassengers)
+            context.BookingPassengers.RemoveRange(context.BookingPassengers.Where(x => x.BookingId == this.Booking.BookingId));
+            context.Bookings.Remove(booking);
+            context.SaveChanges();
+
+            /*try
             {
                 //Remove Entry in Table BookingPassengers with this BookingId (Foreign Key in BookingPassengers)
-                context.BookingPassengers.RemoveRange(booking.BookingPassengers);
+                context.BookingPassengers.RemoveRange(booking.BookingPassengers.Where(x => x.BookingId == this.Booking.BookingId));
                 context.Bookings.Remove(booking);
                 context.SaveChanges();
             }
             catch (Exception)
             {
                 return this.RedirectToPage("/Error");
-            }
+            }*/
 
             return this.RedirectToPage("./Index");
         }
