@@ -1,0 +1,71 @@
+﻿/* Small screens */
+@media only screen and (max-width: 600px) {
+    /* Adjust the size of the pedaloes */
+    #pedaloCircle {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+    }
+
+        /* Adjust the font size of the pedaloes' booking counts */
+        #pedaloCircle p {
+            font-size: 20px;
+        }
+
+        /* Center the text on the pedaloes */
+        #pedaloCircleText {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+    /* Center the pedaloes' names */
+    #pedaloCircleName {
+        margin: auto;
+        text-align: center;
+    }
+
+    /* Make the Quick Create Booking button full width */
+    #quickBooking {
+        width: 110%;
+        display: block;
+        height: 30%;
+        font-size: 15px;
+    }
+}
+
+/* Medium and large screens */
+@media only screen and (min-width: 601px) {
+    /* Adjust the size of the pedaloes */
+    #pedaloCircle {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        text-align: center;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+        /* Center the text on the pedaloes */
+        #pedaloCircleText {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+    /* Center the pedaloes' names */
+    #pedaloCircleName {
+        margin: auto;
+        text-align: center;
+    }
+
+    #flexBookingCustomer {
+        display: flex;
+    }
+
+    #quickBooking {
+        width: 40%;
+    }
+}
