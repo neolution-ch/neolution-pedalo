@@ -33,3 +33,14 @@ Government regulators want to not only know who our customer is, but also what p
 - Booking still needs always exactly 1 Customer, but now it can have 0 to multiple passengers
 - Passengers must only registered with first and last name. 
 - Max. capacity of passengers for a Booking is given by Pedalo capacity, minus 1 (the Customer)
+
+
+### 5. Make the website work on mobile devices using responsiveness
+
+If you open the website in the browser and make the window smaller, you can see how it would look on a mobile device. The tables and forms are not well suited to mobile devices. The application is using Bootstrap as the main UI framework. Bootstrap already has a lot of support and utilities to make it responsive (mobile friendly). Please prepare by first reading about bootstrap's grid system and how you can use this to create mobile friendly layouts. [Bootstrap Grid system](https://getbootstrap.com/docs/3.4/css/#grid)
+
+- Find a good solution for the Dashboard to show elements mobile friendly
+- All pages using tables should only scroll the table sideways, not the navigation 
+  - You can refer to responsive tables section in the bootstrap documentation
+- Adjust font sizes to match the screen size
+- Make sure the text is readably and breaks in the right places when Pedalo or Customer names are very long
