@@ -10,6 +10,10 @@ The app includes overview pages:
 
 As soon as you start the app in Visual Studio, the database will be created automatically. Check the `SampleData.cs` to see how this works. If you make changes to the database, the old database will not automatically be changed. You need to delete the old one first and then restart the app.
 
+## Before you start
+
+Before you start, make sure you are familiar with [LINQ Method Syntax](https://www.tutorialsteacher.com/linq/linq-method-syntax).
+
 ## Tasks
 
 ### 1. Create [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) Pages for Pedaloes, Customers and Bookings
@@ -33,3 +37,19 @@ Government regulators want to not only know who our customer is, but also what p
 - Booking still needs always exactly 1 Customer, but now it can have 0 to multiple passengers
 - Passengers must only registered with first and last name. 
 - Max. capacity of passengers for a Booking is given by Pedalo capacity, minus 1 (the Customer)
+
+### 5. Enhance the styling
+
+Make the tables nicer and switch colors for each row. Align numbers on the right. Read more about [CSS](https://www.w3schools.com/Css/) and [fiddle online](https://jsfiddle.net/vintharas/ybt6k2dw/) style changing.
+
+### 6. Create PDF as receipt
+
+Once you have completed the boooking, create a PDF with the booking details using [QuestPDF](https://www.questpdf.com/). The library is alread integrated into the project and you find an example in the Pedaloes list.
+
+### 7. Send an email receipt
+
+Once you have completed the booking, send a confirmation email.
+
+### 8. Selenium Tests
+
+In the `PedaloWebApp.FunctionalTests` we have included a [selenium test](https://www.selenium.dev/documentation/webdriver/). Build a test that books a pedalo.
