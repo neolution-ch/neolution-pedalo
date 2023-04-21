@@ -40,16 +40,30 @@ Government regulators want to not only know who our customer is, but also what p
 
 ### 5. Enhance the styling
 
-Make the tables nicer and switch colors for each row. Align numbers on the right. Read more about [CSS](https://www.w3schools.com/Css/) and [fiddle online](https://jsfiddle.net/vintharas/ybt6k2dw/) style changing.
+- Make the tables nicer and switch background colors for each row (alternate between light gray and white for example).
+- Align numbers on the right. Read more about [CSS](https://www.w3schools.com/Css/) and [fiddle online](https://jsfiddle.net/vintharas/ybt6k2dw/) style changing.
+- Choose some nicer and consistent colors for buttons
 
-### 6. Create PDF as receipt
+### 6. Make the website work on mobile devices using responsiveness
+
+If you open the website in the browser and make the window smaller, you can see how it would look on a mobile device. All major browser have a mobile device simulation option that could be useful, like Chromes [Device Mode](https://developer.chrome.com/docs/devtools/device-mode/). 
+
+The tables and forms are not well suited to mobile devices. The application is using Bootstrap as the main UI framework. Bootstrap already has a lot of support and utilities to make it responsive (mobile friendly). Please prepare by first reading about bootstrap's grid system and how you can use this to create mobile friendly layouts. [Bootstrap Grid system](https://getbootstrap.com/docs/3.4/css/#grid)
+
+- Find a good solution for the Dashboard to show elements mobile friendly
+- All pages using tables should only scroll the table sideways, not the navigation 
+  - You can refer to responsive tables section in the bootstrap documentation
+- Adjust font sizes to match the screen size
+- Make sure the text is readably and breaks in the right places when Pedalo or Customer names are very long
+
+### 7. Create PDF as receipt
 
 Once you have completed the boooking, create a PDF with the booking details using [QuestPDF](https://www.questpdf.com/). The library is alread integrated into the project and you find an example in the Pedaloes list.
 
-### 7. Send an email receipt
+### 8. Send an email receipt
 
 Once you have completed the booking, send a confirmation email.
 
-### 8. Selenium Tests
+### 9. Selenium Tests
 
 In the `PedaloWebApp.FunctionalTests` we have included a [selenium test](https://www.selenium.dev/documentation/webdriver/). Build a test that books a pedalo.
