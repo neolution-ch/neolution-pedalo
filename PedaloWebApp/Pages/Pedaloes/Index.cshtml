@@ -20,7 +20,10 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Pedaloes[0].HourlyRate)
-            <th></th>
+            </th>
+            <th>
+
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -39,6 +42,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.HourlyRate)
             </td>
+            <td><a href="/pedaloes/pdf/?id=@item.PedaloId">PDF</a></td>
         </tr>
     }
     </tbody>

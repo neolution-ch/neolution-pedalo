@@ -15,7 +15,7 @@ namespace PedaloWebApp.FunctionalTests.SeleniumTests
 
             var mainPage = new MainPage(driver);
             var customersPage = mainPage.Navigation.GoToCustomersPage();
-            var customerEditPage = customersPage.EditCustomer( "Skywalker");
+            var customerEditPage = customersPage.EditCustomer("Skywalker");
 
             customerEditPage.FirstNameTextBox.Clear();
             customerEditPage.FirstNameTextBox.SendKeys("Anakin");
