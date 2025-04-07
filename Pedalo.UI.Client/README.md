@@ -4,9 +4,9 @@ The frontend for this project is based on Next.js (for Server Side Rendering) to
 
 ## Best Practices
 
-- **Use functional components:** We use functional components with hooks instead of class components. This is the recommended way to write React components nowadays. More information: https://reactjs.org/docs/hooks-intro.html
+- **Use functional components:** We use functional components with hooks instead of class components. This is the recommended way to write React components nowadays. More information: <https://reactjs.org/docs/hooks-intro.html>
 
-- **Use TypeScript:** We use TypeScript to write type safe code. This means that we can define the type of each variable and function parameter. This will help us to avoid bugs and make the code more readable. More information: https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html
+- **Use TypeScript:** We use TypeScript to write type safe code. This means that we can define the type of each variable and function parameter. This will help us to avoid bugs and make the code more readable. More information: <https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html>
 
 - **Use `NextPage`** for next js pages:
 
@@ -59,27 +59,27 @@ To get a local instance of the whitelabel client running you will need the follo
 
 - **Visual Studio Code**
   We use this to edit all the typescript files, works better with TypeScript than VS and has more features. If you only want to run the client you don't need to install VS Code.
-  https://code.visualstudio.com/
+  <https://code.visualstudio.com/>
 
 - **yarn**
 
   Package Manger comparable to npm
-  https://yarnpkg.com/lang/en/docs/install/#windows-stable
+  <https://yarnpkg.com/lang/en/docs/install/#windows-stable>
 
 - **Node JS:**
 
   JS Runtime used
 
-  https://nodejs.org/en/
+  <https://nodejs.org/en/>
 
 ## How to get the application running
 
-- Set default terminal to cmd (https://stackoverflow.com/questions/44435697/vscode-change-default-terminal)
+- Set default terminal to cmd (<https://stackoverflow.com/questions/44435697/vscode-change-default-terminal>)
 - Open the root folder in VS Code. So you can edit both the Web API and React Frontend at the same time.
 - Right click on `Pedalo.UI.Client` and select `Open in Terminal`
 - First press ctrl + F5 (or without ctrl if you want to debug) to launch the Web API. This will build the .NET Core Project and also generate the NSWag client.
 - Enter `yarn` into terminal to install all the required packages
-- Enter `yarn dev` into terminal. This will start a development version of the website. It will be ready on http://localhost:30349
+- Enter `yarn dev` into terminal. This will start a development version of the website. It will be ready on <http://localhost:30349>
 
 ## Scripts in package.json
 
@@ -117,7 +117,7 @@ To get a local instance of the whitelabel client running you will need the follo
 
 ## Configuration files for the client
 
-The Configuration files are located in the `config` folder. By default the `default.json` file will be loaded. The config file contains two main sections: `serverRuntimeConfig` and `publicRuntimeConfig`. The difference is that `serverRuntimeConfig` will only be available on the node server (not accessible by the user) whereas `publicRuntimeConfig` will be available on the node server and the browser client. More information: https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration
+The Configuration files are located in the `config` folder. By default the `default.json` file will be loaded. The config file contains two main sections: `serverRuntimeConfig` and `publicRuntimeConfig`. The difference is that `serverRuntimeConfig` will only be available on the node server (not accessible by the user) whereas `publicRuntimeConfig` will be available on the node server and the browser client. More information: <https://nextjs.org/docs/api-reference/next.config.js/runtime-configuration>
 
 ### Using a different config file
 
@@ -140,9 +140,9 @@ To override certain configuration values you can assign environment variables, t
 
 You can override `googleClientSecret` by setting the environment variable `serverRuntimeConfig__googleClientSecret` to whatever you like. Values are only overwritten if an environment variable is set, if there is none the value remains untouched.
 
-You can test this on your local machine by using a `cross-env`. For example altering the `dev` script in the `packages.json` file to ` "dev": "cross-env serverRuntimeConfig__googleClientSecret=overridden yarn orval && next dev -p 30349",` will override the `googleClientSecret` setting in the `serverRuntimeConfig`.
+You can test this on your local machine by using a `cross-env`. For example altering the `dev` script in the `packages.json` file to `"dev": "cross-env serverRuntimeConfig__googleClientSecret=overridden yarn orval && next dev -p 30349",` will override the `googleClientSecret` setting in the `serverRuntimeConfig`.
 
-**If a value need to be overwritten without having the mapping done in the json file (for testing or debuging purposes), you can do that over the `NODE_CONFIG` variable: https://github.com/node-config/node-config/wiki/Environment-Variables#node_config**
+**If a value need to be overwritten without having the mapping done in the json file (for testing or debuging purposes), you can do that over the `NODE_CONFIG` variable: <https://github.com/node-config/node-config/wiki/Environment-Variables#node_config>**
 
 ### next-config.d.ts file
 
@@ -153,13 +153,13 @@ The `next-config.d.ts` file is simply a strongly typed representation of the jso
 - **React Tic Tac Toe Tutorial**
   Very good introduction to tic tac toe. Unfortunately it's in JS and not TS. But google finds multiple TS implementations.
 
-  https://reactjs.org/tutorial/tutorial.html
+  <https://reactjs.org/tutorial/tutorial.html>
 
 - **useRef vs useState**
-  https://www.codebeast.dev/usestate-vs-useref-re-render-or-not/
+  <https://www.codebeast.dev/usestate-vs-useref-re-render-or-not/>
 
 - **8 React Conditional Rendering Methods**
-  https://blog.logrocket.com/conditional-rendering-in-react-c6b0e5af381e/
+  <https://blog.logrocket.com/conditional-rendering-in-react-c6b0e5af381e/>
 
 - **Learn Map, Filter and Reduce**
-  https://medium.com/@joomiguelcunha/learn-map-filter-and-reduce-in-javascript-ea59009593c4
+  <https://medium.com/@joomiguelcunha/learn-map-filter-and-reduce-in-javascript-ea59009593c4>
