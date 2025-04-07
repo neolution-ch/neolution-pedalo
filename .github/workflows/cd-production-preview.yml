@@ -1,0 +1,127 @@
+name: CD - Production Preview
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+# cancel running actions for current PR if new commits were pushed
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GCP_PROJECT_NAME: gcp-project-name-prodcution
+  GCP_CLOUD_RUN_API: pedalo-api-production
+  GCP_CLOUD_RUN_CLIENT: pedalo-client-production
+  GCP_API_PREVIEW_URL: https://your-preview-url-api
+  GCP_CLIENT_PREVIEW_URL: https://prevyour-preview-url-client
+
+  API_DOCKER_IMAGE_TAG: eu.gcr.io/gcp-project-name-prodcution/ui-api:preview-latest
+  CLIENT_DOCKER_IMAGE_TAG: eu.gcr.io/gcp-project-name-prodcution/ui-client:preview-latest
+
+  WORKLOAD_IDENTITY_PROVIDER: projects/651591561863/locations/global/workloadIdentityPools/gh-actions-pool/providers/gh-actions-provider
+  SERVICE_ACCOUNT: pipeline@gcp-project-name-prodcution.iam.gserviceaccount.com
+
+jobs:
+  build-publish-dockers:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+      id-token: "write"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
+        with:
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
+
+      - name: "Authenticate Docker"
+        run: gcloud auth configure-docker -q
+
+      - name: "Set up Docker Buildx"
+        uses: docker/setup-buildx-action@v3
+
+      - name: "Bake api"
+        run: |
+          docker buildx bake api --set *.output="type=docker" --set *.cache-to=
+
+      - name: "Copy generated spec.json from the docker container..."
+        run: |
+          docker cp $(docker create --rm ${{ env.API_DOCKER_IMAGE_TAG }}):/app/spec.json ./Pedalo.UI.Api/openapi-spec.json
+
+      - name: "Bake and push api and client"
+        run: |
+          docker buildx bake --set *.output="type=docker" --set *.cache-to=
+
+      - name: "Tag and push images"
+        run: |
+          docker tag ${{ env.API_DOCKER_IMAGE_TAG }} eu.gcr.io/${{ env.GCP_PROJECT_NAME }}/ui-api:preview-${{ github.run_id }}
+          docker push eu.gcr.io/${{ env.GCP_PROJECT_NAME }}/ui-api:preview-${{ github.run_id }}
+          docker push ${{ env.API_DOCKER_IMAGE_TAG }}
+
+          docker tag ${{ env.CLIENT_DOCKER_IMAGE_TAG }} eu.gcr.io/${{ env.GCP_PROJECT_NAME }}/ui-client:preview-${{ github.run_id }}
+          docker push ${{ env.CLIENT_DOCKER_IMAGE_TAG }}
+          docker push eu.gcr.io/${{ env.GCP_PROJECT_NAME }}/ui-client:preview-${{ github.run_id }}
+
+  database-migrations:
+    needs: build-publish-dockers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install dotnet-ef tools
+        run: dotnet tool install -g dotnet-ef --ignore-failed-sources
+
+      - name: Run migrations against database
+        run: dotnet ef --project Pedalo.Infrastructure database update --connection "${{ secrets.PRODUCTION_CONNECTIONSTRING }}"
+        env:
+          ASPNETCORE_ENVIRONMENT: Pipeline
+
+  deploy-cloud-run:
+    needs: database-migrations
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+      id-token: "write"
+    steps:
+      - name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
+        with:
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
+
+      - name: "Deploy API on Cloud Run"
+        uses: "google-github-actions/deploy-cloudrun@v2"
+        with:
+          service: "${{ env.GCP_CLOUD_RUN_API }}"
+          image: "eu.gcr.io/${{ env.GCP_PROJECT_NAME }}/ui-api:preview-${{ github.run_id }}"
+          region: "europe-west6"
+          no_traffic: true
+          tag: "preview"
+          env_vars: |
+            SiteConfig__ClientBaseUrl=${{ env.GCP_CLIENT_PREVIEW_URL }}
+
+      - name: "Deploy Client on Cloud Run"
+        uses: "google-github-actions/deploy-cloudrun@v2"
+        with:
+          service: "${{ env.GCP_CLOUD_RUN_CLIENT }}"
+          image: "eu.gcr.io/${{ env.GCP_PROJECT_NAME }}/ui-client:preview-${{ github.run_id }}"
+          region: "europe-west6"
+          no_traffic: true
+          tag: "preview"
+          env_vars: |
+            publicRuntimeConfig__apiBaseUrl=${{ env.GCP_API_PREVIEW_URL }}

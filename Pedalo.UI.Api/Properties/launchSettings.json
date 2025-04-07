@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "Pedalo.UI.Api": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "api/Translations/languages",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:41735;http://localhost:40281"
+    }
+  }
+}

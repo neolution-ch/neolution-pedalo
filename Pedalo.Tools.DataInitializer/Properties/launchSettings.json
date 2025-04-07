@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Pedalo.Tools.DataInitializer": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

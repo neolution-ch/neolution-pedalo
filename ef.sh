@@ -1,0 +1,1 @@
+dotnet ef --project Pedalo.Infrastructure "$@"

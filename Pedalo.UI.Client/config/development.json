@@ -1,0 +1,23 @@
+{
+  "serverRuntimeConfig": {
+    "addHstsHeader": false,
+    "nextAuth": {
+      "writeJwtToSession": true,
+      "url": "https://localhost:30349",
+      "oAuthProviders": {
+        "google": {
+          "enabled": true,
+          "clientId": "1012795902777-96ruk78cfjl06a5mmhprrglh5dvsab95.apps.googleusercontent.com"
+        }
+      }
+    },
+    "googleSecrets": {
+      "enabled": true,
+      "gcpProjectId": "white-label-development-3948"
+    },
+    "validateSslCertificats": false
+  },
+  "publicRuntimeConfig": {
+    "apiBaseUrl": "https://localhost:41735"
+  }
+}

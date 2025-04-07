@@ -1,0 +1,130 @@
+name: CD - Staging
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+# cancel running actions for current PR if new commits were pushed
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GCP_PROJECT_NAME: gcp-project-name
+  GCP_CLOUD_RUN_API: pedalo-api-staging
+  GCP_CLOUD_RUN_CLIENT: pedalo-client-staging
+
+  API_DOCKER_IMAGE_TAG: eu.gcr.io/gcp-project-name/ui-api:latest
+  CLIENT_DOCKER_IMAGE_TAG: eu.gcr.io/gcp-project-name/ui-client:latest
+
+  WORKLOAD_IDENTITY_PROVIDER: projects/project-number/locations/global/workloadIdentityPools/gh-actions-pool/providers/gh-actions-provider
+  SERVICE_ACCOUNT: gh-actions@neolution-whitelabel.iam.gserviceaccount.com
+
+jobs:
+  build-publish-dockers:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+      id-token: "write"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
+        with:
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
+
+      - name: "Authenticate Docker"
+        run: gcloud auth configure-docker -q
+
+      - name: "Set up Docker Buildx"
+        uses: docker/setup-buildx-action@v3
+
+      - name: "Bake api"
+        run: |
+          docker buildx bake api --set *.output="type=docker"
+
+      - name: "Copy generated spec.json from the docker container..."
+        run: |
+          docker cp $(docker create --rm ${{ env.API_DOCKER_IMAGE_TAG }}):/app/spec.json ./Pedalo.UI.Api/openapi-spec.json
+
+      - name: "Bake and push api and client"
+        run: |
+          docker buildx bake --push api client
+
+  # This runs the initializer, this is great for new projects with rapid development.
+  # But at some point you probably want to skip this job (database-initializer) and just apply the migrations (database-migrations).
+  database-initializer:
+    # needs: build-publish-dockers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Set up Docker Buildx"
+        uses: docker/setup-buildx-action@v3
+
+      - name: build data-initializer
+        run: |
+          docker buildx bake data-initializer --set *.output="type=docker"
+
+      - name: run data-initializer
+        run: |
+          docker run --rm \
+          -e ConnectionStrings__AppDbContext="${{ secrets.STAGING_CONNECTIONSTRING }}" \
+          -e CreateSnapshot="false" \
+          -e silent=true \
+          pedalo-tools-data-initalizer
+
+  database-migrations:
+    needs: database-initializer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install dotnet-ef tools
+        run: dotnet tool install -g dotnet-ef --ignore-failed-sources
+
+      - name: Run migrations against database
+        run: dotnet ef --project Pedalo.Infrastructure database update --connection "${{ secrets.STAGING_CONNECTIONSTRING }}"
+        env:
+          ASPNETCORE_ENVIRONMENT: Pipeline
+
+  deploy-cloud-run:
+    needs: [build-publish-dockers, database-migrations]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+      id-token: "write"
+    steps:
+      - name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
+        with:
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
+
+      - name: "Deploy API on Cloud Run"
+        uses: "google-github-actions/deploy-cloudrun@v2"
+        with:
+          service: "${{ env.GCP_CLOUD_RUN_API }}"
+          image: "eu.gcr.io/${{ env.GCP_PROJECT_NAME }}/ui-api:latest"
+          region: "europe-west6"
+
+      - name: "Deploy Client on Cloud Run"
+        uses: "google-github-actions/deploy-cloudrun@v2"
+        with:
+          service: "${{ env.GCP_CLOUD_RUN_CLIENT }}"
+          image: "eu.gcr.io/${{ env.GCP_PROJECT_NAME }}/ui-client:latest"
+          region: "europe-west6"
