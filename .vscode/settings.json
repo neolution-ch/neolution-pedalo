@@ -22,8 +22,8 @@
     "source.fixAll.eslint": "explicit"
   },
   "eslint.workingDirectories": [
-    "Pedalo.UI.Client",
-    "Pedalo.FunctionalTests"
+    "PedaloWebApp.UI.Client",
+    "PedaloWebApp.FunctionalTests"
   ],
   "dotnet.defaultSolution": "Pedalo.sln"
 }

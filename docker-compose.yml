@@ -3,7 +3,7 @@ services:
     image: ${API_DOCKER_IMAGE_TAG:-pedalo-ui-api}
     build:
       context: .
-      dockerfile: ./Pedalo.UI.Api/Dockerfile
+      dockerfile: ./PedaloWebApp.UI.Api/Dockerfile
       x-bake:
         cache-from:
           - type=gha,scope=api
@@ -31,7 +31,7 @@ services:
     image: ${CLIENT_DOCKER_IMAGE_TAG:-pedalo-ui-client}
     build:
       context: .
-      dockerfile: ./Pedalo.UI.Client/Dockerfile
+      dockerfile: ./PedaloWebApp.UI.Client/Dockerfile
       x-bake:
         cache-from:
           - type=gha,scope=client
@@ -57,7 +57,7 @@ services:
     image: ${docker_image_tag_data_initializer:-pedalo-tools-data-initalizer}
     build:
       context: .
-      dockerfile: ./Pedalo.Tools.DataInitializer/Dockerfile
+      dockerfile: ./PedaloWebApp.Tools.DataInitializer/Dockerfile
       x-bake:
         cache-from:
           - type=gha,scope=data-initializer
@@ -75,7 +75,7 @@ services:
     image: ${docker_image_tag_cypress_tests:-pedalo-ui-cypress}
     build:
       context: .
-      dockerfile: ./Pedalo.FunctionalTests/Dockerfile
+      dockerfile: ./PedaloWebApp.FunctionalTests/Dockerfile
       x-bake:
         cache-from:
           - type=gha,scope=cypress-tests

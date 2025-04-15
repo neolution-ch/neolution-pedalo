@@ -6,22 +6,22 @@
   "configurations": [
     {
       "requireExactSource": false,
-      "name": "Pedalo.UI.Api",
+      "name": "PedaloWebApp.UI.Api",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "build Pedalo.UI.Api",
-      "program": "${workspaceFolder}/Pedalo.UI.Api/bin/Debug/net8.0/Pedalo.UI.Api.dll",
-      "cwd": "${workspaceFolder}/Pedalo.UI.Api",
+      "preLaunchTask": "build PedaloWebApp.UI.Api",
+      "program": "${workspaceFolder}/PedaloWebApp.UI.Api/bin/Debug/net8.0/PedaloWebApp.UI.Api.dll",
+      "cwd": "${workspaceFolder}/PedaloWebApp.UI.Api",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     },
     {
-      "name": "Pedalo.Tools.DataInitializer",
+      "name": "PedaloWebApp.Tools.DataInitializer",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "build Pedalo.Tools.DataInitializer",
-      "program": "${workspaceFolder}/Pedalo.Tools.DataInitializer/bin/Debug/net8.0/Pedalo.Tools.DataInitializer.dll",
-      "cwd": "${workspaceFolder}/Pedalo.Tools.DataInitializer",
+      "preLaunchTask": "build PedaloWebApp.Tools.DataInitializer",
+      "program": "${workspaceFolder}/PedaloWebApp.Tools.DataInitializer/bin/Debug/net8.0/PedaloWebApp.Tools.DataInitializer.dll",
+      "cwd": "${workspaceFolder}/PedaloWebApp.Tools.DataInitializer",
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -29,7 +29,7 @@
       "internalConsoleOptions": "neverOpen"
     },
     {
-      "name": "Pedalo.UI.Client",
+      "name": "PedaloWebApp.UI.Client",
       "type": "node-terminal",
       "request": "launch",
       "command": "yarn dev",
@@ -37,37 +37,37 @@
         "pattern": "Local:.* (https?://.+)",
         "uriFormat": "%s",
         "action": "debugWithChrome",
-        "webRoot": "${workspaceFolder}/Pedalo.UI.Client"
+        "webRoot": "${workspaceFolder}/PedaloWebApp.UI.Client"
       },
-      "cwd": "${workspaceFolder}/Pedalo.UI.Client"
+      "cwd": "${workspaceFolder}/PedaloWebApp.UI.Client"
     },
     {
-      "name": "Pedalo.UI.Client: run production build",
+      "name": "PedaloWebApp.UI.Client: run production build",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["buildandstart"],
-      "cwd": "${workspaceFolder}/Pedalo.UI.Client",
+      "cwd": "${workspaceFolder}/PedaloWebApp.UI.Client",
       "console": "integratedTerminal",
       "autoAttachChildProcesses": false
     },
     {
-      "name": "Pedalo.FunctionalTests: open",
+      "name": "PedaloWebApp.FunctionalTests: open",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["cypress", "open"],
-      "cwd": "${workspaceFolder}/Pedalo.FunctionalTests",
+      "cwd": "${workspaceFolder}/PedaloWebApp.FunctionalTests",
       "console": "integratedTerminal",
       "autoAttachChildProcesses": false
     },
     {
-      "name": "Pedalo.FunctionalTests: run",
+      "name": "PedaloWebApp.FunctionalTests: run",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["cypress", "run"],
-      "cwd": "${workspaceFolder}/Pedalo.FunctionalTests",
+      "cwd": "${workspaceFolder}/PedaloWebApp.FunctionalTests",
       "console": "integratedTerminal",
       "autoAttachChildProcesses": false
     }

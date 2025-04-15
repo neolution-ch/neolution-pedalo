@@ -53,7 +53,7 @@ jobs:
 
       - name: "Copy generated spec.json from the docker container..."
         run: |
-          docker cp $(docker create --rm ${{ env.API_DOCKER_IMAGE_TAG }}):/app/spec.json ./Pedalo.UI.Api/openapi-spec.json
+          docker cp $(docker create --rm ${{ env.API_DOCKER_IMAGE_TAG }}):/app/spec.json ./PedaloWebApp.UI.Api/openapi-spec.json
 
       - name: "Bake and push api and client"
         run: |
@@ -84,7 +84,7 @@ jobs:
         run: dotnet tool install -g dotnet-ef --ignore-failed-sources
 
       - name: Run migrations against database
-        run: dotnet ef --project Pedalo.Infrastructure database update --connection "${{ secrets.PRODUCTION_CONNECTIONSTRING }}"
+        run: dotnet ef --project PedaloWebApp.Infrastructure database update --connection "${{ secrets.PRODUCTION_CONNECTIONSTRING }}"
         env:
           ASPNETCORE_ENVIRONMENT: Pipeline
 

@@ -37,13 +37,13 @@ jobs:
 
       - name: dotnet build api
         run: |
-          dotnet build -c Debug ./Pedalo.UI.Api/Pedalo.UI.Api.csproj
+          dotnet build -c Debug ./PedaloWebApp.UI.Api/PedaloWebApp.UI.Api.csproj
 
       - name: publish spec.json
         uses: actions/upload-artifact@v4
         with:
           name: spec-json-${{ github.run_id }}-${{ github.run_attempt }}
-          path: ./Pedalo.UI.Api/openapi-spec.json
+          path: ./PedaloWebApp.UI.Api/openapi-spec.json
 
   unit-tests:
     if: github.event.pull_request.draft == false
@@ -125,7 +125,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: spec-json-${{ github.run_id }}-${{ github.run_attempt }}
-          path: ./Pedalo.UI.Api
+          path: ./PedaloWebApp.UI.Api
 
       - name: Expose GitHub Runtime
         uses: crazy-max/ghaction-github-runtime@v3
@@ -195,7 +195,7 @@ jobs:
 
       - name: "Docker compose up"
         run: |
-          tests=($(cd Pedalo.FunctionalTests && find cypress/e2e/ -type f -name "*.cy.ts"))
+          tests=($(cd PedaloWebApp.FunctionalTests && find cypress/e2e/ -type f -name "*.cy.ts"))
           testCount=${#tests[@]}
           totalAgents=${{ matrix.total }}
           agentNumber=${{ matrix.index }}

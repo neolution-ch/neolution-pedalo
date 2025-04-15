@@ -1,1 +1,1 @@
-dotnet ef --project Pedalo.Infrastructure "$@"
+dotnet ef --project PedaloWebApp.Infrastructure "$@"

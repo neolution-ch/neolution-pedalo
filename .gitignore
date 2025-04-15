@@ -1,4 +1,4 @@
-## Please keep in sync with .dockerignore 
+## Please keep in sync with .dockerignore
 ## Use "npx gitignore-to-dockerignore" to generate .dockerignore from this .gitignore
 ## !!! REMOVE THE openapi-spec.json ENTRIES IN THE .dockerignore FILE !!!
 
@@ -519,6 +519,6 @@ DriverInclude.wxs
 aws-logger-errors.txt
 
 # Terraform
-**/.terraform  
+**/.terraform
 
-Pedalo.UI.Api/openapi-spec.json
+PedaloWebApp.UI.Api/openapi-spec.json
