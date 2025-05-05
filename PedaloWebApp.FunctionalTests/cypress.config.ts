@@ -17,7 +17,7 @@ export default defineConfig({
     mochaFile: "cypress/results/e2e-tests-[hash].xml",
   },
   env: {
-    dbName: "pedalo",
+    dbName: "neolution_pedalo",
     dbServer: "localhost",
     dbPort: 1433,
     dbUser: "sa",
@@ -65,9 +65,8 @@ export default defineConfig({
             .filter((test) => test.state === "passed")
             .forEach((test) => {
               if (test.attempts.find((attempt) => attempt.state === "failed")) {
-                failedTestString += `- Test "${test.title}" failed ${
-                  test.attempts.filter((attempt) => attempt.state === "failed").length
-                } time(s) before succeeding\r\n`;
+                failedTestString += `- Test "${test.title}" failed ${test.attempts.filter((attempt) => attempt.state === "failed").length
+                  } time(s) before succeeding\r\n`;
               }
             });
 

@@ -7,19 +7,21 @@ import { NextPage } from "next";
 const HomePage: NextPage = () => (
   <>
     <Head>
-      <title>Whitelabel</title>
+      <title>Rent-A-Pedalo</title>
     </Head>
     <SideBarLayout>
-      <h1>Welcome to the Whitelabel </h1>
+      <h1>Welcome to the Rent-A-Pedalo</h1>
       <p>This template already includes various features which will be exaplained here.</p>
-      <h2>Authentication</h2>
-      <p>
-        Authentication is handled by{" "}
-        <a target="_blank" rel="noopener noreferrer" href="https://next-auth.js.org/">
-          next-auth
-        </a>
-        .
-      </p>
+      <ul>
+        <li>Fully working <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete" className="link-primary" target="_blank" rel="noreferrer">CRUD</a> customer management</li>
+        <li>Download a PDF fact sheet for each customer</li>
+        <li>Overview of the pedalo fleet</li>
+        <li>Overview of the past and current bookings</li>
+        <li>Switch between German and English as the UI language</li>
+      </ul>
+      <p>Other features still need to be implemented, you can find some of them in README.</p>
+      <h2>Before you start</h2>
+      <p>Check the README to understand the architecture and tools involved to run and develop this software.</p>
     </SideBarLayout>
   </>
 );

@@ -14,16 +14,7 @@ const CustomAppSideBarLayoutProvider: FC<PropsWithChildren> = ({ children }) => 
         </a>
       }
       footer={
-        <>
-          <a href="#" className="link-primary">
-            Terms &amp; Conditions
-          </a>
-          <i className="mx-2">&#9679;</i>
-          <a href="#" className="link-primary">
-            Privacy Policy
-          </a>
-          <p>Copyright © Your Website {new Date().getUTCFullYear()}</p>
-        </>
+        <p>Copyright © Neolution AG {new Date().getUTCFullYear()}</p>
       }
       userDropDownMenuToggle={initials}
       userDropDownMenu={<NavbarUser />}

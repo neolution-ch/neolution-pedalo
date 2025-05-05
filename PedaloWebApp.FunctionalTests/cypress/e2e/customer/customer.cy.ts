@@ -1,30 +1,27 @@
-import type { AddressModel } from "orval/axios";
-import { addressesCreate } from "orval/axios";
-import AddressPage from "../../pages/AddressPage";
+import type { CustomerModel } from "orval/axios";
+import { customersCreate } from "orval/axios";
+import CustomersPage from "../../pages/CustomerPage";
 
-const page = new AddressPage();
+const page = new CustomersPage();
 
-describe("Address", () => {
-  let addressModel: AddressModel;
+describe("Customer", () => {
+  let addressModel: CustomerModel;
 
   beforeEach(() => {
-    cy.signIn("tenant-admin@tenant1.ch", "Secret1!").then(() => {
-      addressModel = page.generateFakeModel();
-      cy.wrap(addressesCreate(addressModel));
-    });
-
-    cy.visit("/addresses");
+    addressModel = page.generateFakeModel();
+    cy.wrap(customersCreate(addressModel));
+    cy.visit("/customers");
   });
 
   it("Navigation / read works", () => {
     cy.visit("/");
-    cy.contains("Adressen").click();
+    cy.contains("Kunden").click();
     page.rowExists(addressModel);
     cy.reload();
     page.rowExists(addressModel);
   });
 
-  it("Adding an address works", () => {
+  it("Adding a customer works", () => {
     const model = page.generateFakeModel();
     page.clickNew();
     page.fillForm(model);
@@ -32,7 +29,7 @@ describe("Address", () => {
     page.rowExists(model);
   });
 
-  it("Editing an address works", () => {
+  it("Editing a customer works", () => {
     const updatedModel = page.generateFakeModel();
     page.openRow(addressModel);
     page.updateForm(addressModel, updatedModel);
@@ -40,14 +37,14 @@ describe("Address", () => {
     page.rowExists(updatedModel);
   });
 
-  it("Deleting an address works", () => {
+  it("Deleting a customer works", () => {
     page.rowExists(addressModel);
     page.deleteRow(addressModel);
     cy.confirmDeleteDialog();
     page.rowNotExists(addressModel);
   });
 
-  it("Filtering addresses works", () => {
+  it("Filtering customer works", () => {
     cy.contains("th", "Vorname")
       .invoke("index")
       .then((i) => {
@@ -57,7 +54,7 @@ describe("Address", () => {
           .eq(i)
           .get("input")
           .then((x) => {
-            cy.wrap(x).type(`${addressModel.firstname ?? ""}{enter}`);
+            cy.wrap(x).type(`${addressModel.firstName ?? ""}{enter}`);
             cy.get("tbody>tr").should("have.length", 1);
             page.rowExists(addressModel);
 
@@ -71,7 +68,7 @@ describe("Address", () => {
   it("Paging works", () => {
     cy.testDataTablePaging(async () => {
       for (let index = 0; index < 30; index++) {
-        await addressesCreate(page.generateFakeModel());
+        await customersCreate(page.generateFakeModel());
       }
 
       return 30;
