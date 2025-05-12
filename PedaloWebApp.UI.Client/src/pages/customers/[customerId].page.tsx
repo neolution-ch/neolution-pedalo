@@ -16,12 +16,12 @@ const UpdateCustomerPage = () => {
   return (
     <>
       <Head>
-        <title>{t(TranslationCodeId.Title_Address_Edit)}</title>
+        <title>{t(TranslationCodeId.Title_Customer_Edit)}</title>
       </Head>
       <SideBarLayout>
         <Card>
           <CardBody>
-            <CardTitle tag="h3">{t(TranslationCodeId.Title_Address_Edit)}</CardTitle>
+            <CardTitle tag="h3">{t(TranslationCodeId.Title_Customer_Edit)}</CardTitle>
             <Row>
               <Col lg="3">
                 {!isLoading && data && <CustomerForm defaultValues={data} />}

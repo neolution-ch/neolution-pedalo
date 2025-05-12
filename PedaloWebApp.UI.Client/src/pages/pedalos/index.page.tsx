@@ -59,7 +59,7 @@ const ListPage = () => {
       <SideBarLayout>
         <Card>
           <CardBody>
-            <CardTitle tag="h3">{t(TranslationCodeId.Text_AddressIntro)}</CardTitle>
+            <CardTitle tag="h3">{t(TranslationCodeId.Text_PedalosIntro)}</CardTitle>
 
             {isLoading && <div>Loading...</div>}
 

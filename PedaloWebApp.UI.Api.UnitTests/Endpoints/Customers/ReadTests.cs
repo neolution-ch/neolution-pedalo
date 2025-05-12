@@ -6,6 +6,7 @@
     using PedaloWebApp.TestUtilities.Fakes;
     using PedaloWebApp.UI.Api.Endpoints.Customers;
     using PedaloWebApp.UI.Api.Models.Customers;
+    using PedaloWebApp.UI.Api.UnitTests.Customizations;
 
     /// <summary>
     /// Unit tests for the <see cref="Read"/> endpoint.
@@ -22,7 +23,9 @@
         /// </summary>
         public ReadTests()
         {
-            this.fixture = new Fixture().Customize(new AutoNSubstituteCustomization());
+            this.fixture = new Fixture()
+                .Customize(new AutoNSubstituteCustomization())
+                .Customize(new DateOnlyCustomization());
         }
 
         /// <summary>

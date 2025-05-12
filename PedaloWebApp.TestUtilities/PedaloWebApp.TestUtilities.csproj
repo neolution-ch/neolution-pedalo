@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PedaloWebApp.Core\PedaloWebApp.Core.csproj" />
     <ProjectReference Include="..\PedaloWebApp.Infrastructure\PedaloWebApp.Infrastructure.csproj" />
   </ItemGroup>
 

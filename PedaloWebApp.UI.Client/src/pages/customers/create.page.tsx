@@ -20,12 +20,12 @@ const CreateCustomerPage = () => {
   return (
     <>
       <Head>
-        <title>{t(TranslationCodeId.Title_Address_Edit)}</title>
+        <title>{t(TranslationCodeId.Title_Customer_New)}</title>
       </Head>
       <SideBarLayout>
         <Card>
           <CardBody>
-            <CardTitle tag="h3">{t(TranslationCodeId.Title_Address_Edit)}</CardTitle>
+            <CardTitle tag="h3">{t(TranslationCodeId.Title_Customer_New)}</CardTitle>
             <Row>
               <Col lg="3">
                 <CustomerForm defaultValues={defaultValues} />

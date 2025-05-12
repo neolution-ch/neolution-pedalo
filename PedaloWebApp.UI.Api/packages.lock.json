@@ -163,11 +163,6 @@
           "System.Threading.Tasks.Extensions": "4.5.4"
         }
       },
-      "BCrypt.Net-Next": {
-        "type": "Transitive",
-        "resolved": "4.0.3",
-        "contentHash": "W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA=="
-      },
       "FluentValidation": {
         "type": "Transitive",
         "resolved": "10.3.6",
@@ -1491,7 +1486,6 @@
       "pedalowebapp.infrastructure": {
         "type": "Project",
         "dependencies": {
-          "BCrypt.Net-Next": "[4.0.3, )",
           "Microsoft.AspNetCore.Hosting.Abstractions": "[2.2.0, )",
           "Microsoft.EntityFrameworkCore": "[8.0.14, )",
           "Microsoft.EntityFrameworkCore.SqlServer": "[8.0.14, )",
