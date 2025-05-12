@@ -14,7 +14,6 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import "./commands/authentication";
 import "./commands/sql";
 import "./commands/form";
 import "./commands/helpers";
