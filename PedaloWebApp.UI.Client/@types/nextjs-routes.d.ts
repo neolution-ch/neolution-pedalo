@@ -17,7 +17,6 @@ declare module "nextjs-routes" {
     | StaticRoute<"/customers/create">
     | StaticRoute<"/customers">
     | DynamicRoute<"/customers/[customerId]", { "customerId": string }>
-    | StaticRoute<"/debug">
     | StaticRoute<"/forbidden">
     | StaticRoute<"/">
     | StaticRoute<"/pedalos">;

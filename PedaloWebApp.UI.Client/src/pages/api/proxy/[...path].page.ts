@@ -1,7 +1,6 @@
 import { getCookie } from "cookies-next";
 import httpProxy from "http-proxy";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getToken } from "next-auth/jwt";
 import getNextConfig from "next/config";
 
 const {
@@ -25,15 +24,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const target = `${apiBaseUrl}/${req.url?.replace("/api/proxy/", "")}`;
   const headers: { [header: string]: string } = {};
 
-  const token = await getToken({ req });
-
-  if (token) {
-    headers.Authorization = `Bearer ${token?.apiJwtToken}`;
-  } else {
-    // Remove the Authorization header if no token is found,
-    // to mitigate attacks directly on the API
-    headers.Authorization = "";
-  }
+  // Remove the Authorization header if no token is found,
+  // to mitigate attacks directly on the API
+  headers.Authorization = "";
 
   const locale = getCookie("NEXT_LOCALE", { req })?.toString();
   if (locale) {
