@@ -33,18 +33,16 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="FakeAppDbContextFactory" /> class.
         /// </summary>
-        /// <param name="tenantId">The tenant identifier.</param>
-        public FakeAppDbContextFactory(Guid tenantId)
-            : this(tenantId, true)
+        public FakeAppDbContextFactory()
+            : this(useInMemory: true)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FakeAppDbContextFactory"/> class.
         /// </summary>
-        /// <param name="tenantId">The tenant identifier.</param>
         /// <param name="useInMemory">if set to <c>true</c> use in-memory database.</param>
-        public FakeAppDbContextFactory(Guid tenantId, bool useInMemory)
+        public FakeAppDbContextFactory(bool useInMemory)
         {
             var appDbContextFactoryAssembly = typeof(AppDbContextFactory).Assembly;
             this.connection = CreateDbConnection(useInMemory);
@@ -53,7 +51,6 @@
 
             this.config = new AppDbContextConfig
             {
-                TenantId = tenantId,
                 EntityConfigurationsAssembly = appDbContextFactoryAssembly,
             };
 
@@ -67,7 +64,9 @@
         /// <inheritdoc/>
         public AppDbContext CreateContext()
         {
-            return new AppDbContext(this.optionsBuilder.Options, this.config);
+            var context = new AppDbContext(this.optionsBuilder.Options, this.config);
+            context.Database.EnsureCreated();
+            return context;
         }
 
         /// <inheritdoc/>
@@ -79,7 +78,9 @@
         /// <inheritdoc/>
         public AppDbContext CreateReadOnlyContext()
         {
-            return new AppDbContext(this.optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking).Options, this.config);
+            var context = new AppDbContext(this.optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking).Options, this.config);
+            context.Database.EnsureCreated();
+            return context;
         }
 
         /// <summary>

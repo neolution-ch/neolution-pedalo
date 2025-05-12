@@ -1,6 +1,5 @@
 ﻿namespace PedaloWebApp.Core.Domain
 {
-    using System;
     using System.Reflection;
 
     /// <summary>
@@ -8,11 +7,6 @@
     /// </summary>
     public class AppDbContextConfig
     {
-        /// <summary>
-        /// Gets or sets the tenant identifier.
-        /// </summary>
-        public Guid? TenantId { get; set; }
-
         /// <summary>
         /// Gets or sets the entity configurations assembly.
         /// </summary>

@@ -522,3 +522,4 @@ aws-logger-errors.txt
 **/.terraform
 
 PedaloWebApp.UI.Api/openapi-spec.json
+**/.yarn/install-state.gz
