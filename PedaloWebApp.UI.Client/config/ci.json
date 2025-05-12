@@ -1,11 +1,5 @@
 {
-  "serverRuntimeConfig": {
-    "nextAuth": {
-      "writeJwtToSession": true,
-      "secret": "+6TLu2oDsdz2ZIFf7yiOfOt0nwVl+0T68Ua5fyU8tZM=",
-      "url": "http://client"
-    }
-  },
+  "serverRuntimeConfig": {},
   "publicRuntimeConfig": {
     "apiBaseUrl": "http://api"
   }

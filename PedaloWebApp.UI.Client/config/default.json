@@ -2,18 +2,6 @@
   "serverRuntimeConfig": {
     "sslDetector": "azure",
     "addHstsHeader": true,
-    "nextAuth": {
-      "writeJwtToSession": false,
-      "secret": null,
-      "url": null,
-      "oAuthProviders": {
-        "google": {
-          "enabled": true,
-          "clientId": null,
-          "clientSecret": null
-        }
-      }
-    },
     "googleSecrets": {
       "enabled": false,
       "gcpProjectId": null

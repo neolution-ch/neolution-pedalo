@@ -121,14 +121,5 @@ module.exports = async () => {
     nextConfig: nextConfig,
   });
 
-  const {
-    serverRuntimeConfig: {
-      nextAuth: { secret: nextAuthSecret, url: nextAuthUrl },
-    },
-  } = nextConfigWithSecrets;
-
-  process.env.NEXTAUTH_SECRET = nextAuthSecret;
-  process.env.NEXTAUTH_URL = nextAuthUrl;
-
   return withRoutes(withBundleAnalyzer(nextConfigWithSecrets));
 };

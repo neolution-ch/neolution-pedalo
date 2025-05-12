@@ -2321,15 +2321,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios-auth-refresh@npm:^3.3.6":
-  version: 3.3.6
-  resolution: "axios-auth-refresh@npm:3.3.6"
-  peerDependencies:
-    axios: ">= 0.18 < 0.19.0 || >= 0.19.1"
-  checksum: 10c0/c0089eceeec697f239315ca0b3c79f95cf45831eac92c7f8a7475c776dfa2d64017450422981fbd39a6786fdf10e95c40b70fc70648ed5e2b7fe466ba1e1e4a8
-  languageName: node
-  linkType: hard
-
 "axios-retry@npm:^3.4.0":
   version: 3.9.1
   resolution: "axios-retry@npm:3.9.1"
@@ -7341,7 +7332,6 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^5.41.0"
     "@typescript-eslint/parser": "npm:^5.41.0"
     axios: "npm:^1.3.4"
-    axios-auth-refresh: "npm:^3.3.6"
     axios-retry: "npm:^3.4.0"
     bootstrap: "npm:^5.2.2"
     classnames: "npm:^2.3.2"

@@ -24,10 +24,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const target = `${apiBaseUrl}/${req.url?.replace("/api/proxy/", "")}`;
   const headers: { [header: string]: string } = {};
 
-  // Remove the Authorization header if no token is found,
-  // to mitigate attacks directly on the API
-  headers.Authorization = "";
-
   const locale = getCookie("NEXT_LOCALE", { req })?.toString();
   if (locale) {
     headers.Language = locale;
