@@ -39,5 +39,5 @@ before(() => {
     keystrokeDelay: 0,
   });
   cy.resetDb();
-  cy.log("DB RESETED");
+  cy.log("Restored database to snapshot");
 });

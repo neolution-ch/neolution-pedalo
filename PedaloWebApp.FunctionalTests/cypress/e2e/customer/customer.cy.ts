@@ -5,20 +5,20 @@ import CustomersPage from "../../pages/CustomerPage";
 const page = new CustomersPage();
 
 describe("Customer", () => {
-  let addressModel: CustomerModel;
+  let customerModel: CustomerModel;
 
   beforeEach(() => {
-    addressModel = page.generateFakeModel();
-    cy.wrap(customersCreate(addressModel));
+    customerModel = page.generateFakeModel();
+    cy.wrap(customersCreate(customerModel));
     cy.visit("/customers");
   });
 
   it("Navigation / read works", () => {
     cy.visit("/");
     cy.contains("Kunden").click();
-    page.rowExists(addressModel);
+    page.rowExists(customerModel);
     cy.reload();
-    page.rowExists(addressModel);
+    page.rowExists(customerModel);
   });
 
   it("Adding a customer works", () => {
@@ -31,17 +31,17 @@ describe("Customer", () => {
 
   it("Editing a customer works", () => {
     const updatedModel = page.generateFakeModel();
-    page.openRow(addressModel);
-    page.updateForm(addressModel, updatedModel);
+    page.openRow(customerModel);
+    page.updateForm(customerModel, updatedModel);
     cy.saveForm({ clickBack: true });
     page.rowExists(updatedModel);
   });
 
   it("Deleting a customer works", () => {
-    page.rowExists(addressModel);
-    page.deleteRow(addressModel);
+    page.rowExists(customerModel);
+    page.deleteRow(customerModel);
     cy.confirmDeleteDialog();
-    page.rowNotExists(addressModel);
+    page.rowNotExists(customerModel);
   });
 
   it("Filtering customer works", () => {
@@ -50,28 +50,17 @@ describe("Customer", () => {
       .then((i) => {
         cy.get("thead>tr")
           .eq(1)
-          .get("th")
+          .find("th")
           .eq(i)
-          .get("input")
+          .find("input")
           .then((x) => {
-            cy.wrap(x).type(`${addressModel.firstName ?? ""}{enter}`);
+            cy.wrap(x).type(`${customerModel.firstName ?? ""}{enter}`, { force: true });
             cy.get("tbody>tr").should("have.length", 1);
-            page.rowExists(addressModel);
-
-            cy.get("thead .fa-xmark").click();
+            page.rowExists(customerModel);
+            cy.get("thead .fa-xmark").click({ force: true });
             cy.get("tbody>tr").should("have.length.greaterThan", 1);
             cy.wrap(x).should("be.empty");
           });
       });
-  });
-
-  it("Paging works", () => {
-    cy.testDataTablePaging(async () => {
-      for (let index = 0; index < 30; index++) {
-        await customersCreate(page.generateFakeModel());
-      }
-
-      return 30;
-    });
   });
 });

@@ -14,7 +14,7 @@
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the address.
+        /// Gets or sets the customer.
         /// </summary>
         [FromBody]
         public CustomerModel? Customer { get; set; }

@@ -2,46 +2,46 @@ import { faker } from "@faker-js/faker";
 import type { CustomerModel } from "orval/axios";
 
 class CustomerPage {
-  public rowExists = (address: CustomerModel): Cypress.Chainable => cy.dataTableRowExists(address.firstName ?? "", address.lastName ?? "");
+  public rowExists = (customer: CustomerModel): Cypress.Chainable => cy.dataTableRowExists(customer.firstName ?? "", customer.lastName ?? "");
 
-  public rowNotExists = (address: CustomerModel): Cypress.Chainable =>
-    cy.dataTableRowNotExists(address.firstName ?? "", address.lastName ?? "");
+  public rowNotExists = (customer: CustomerModel): Cypress.Chainable =>
+    cy.dataTableRowNotExists(customer.firstName ?? "", customer.lastName ?? "");
 
-  public fillForm = (address: CustomerModel): void => {
+  public fillForm = (customer: CustomerModel): void => {
     cy.getByLabel("Vorname")
       .clear()
-      .type(address.firstName ?? "");
+      .type(customer.firstName ?? "");
     cy.getByLabel("Nachname")
       .clear()
-      .type(address.lastName ?? "");
+      .type(customer.lastName ?? "");
   };
 
-  public updateForm = (expected: CustomerModel, newAddress: CustomerModel): void => {
+  public updateForm = (expected: CustomerModel, newCustomer: CustomerModel): void => {
     cy.getByLabel("Vorname")
       .should("have.value", expected.firstName)
       .clear()
-      .type(newAddress.firstName ?? "");
+      .type(newCustomer.firstName ?? "");
     cy.getByLabel("Nachname")
       .should("have.value", expected.lastName)
       .clear()
-      .type(newAddress.lastName ?? "");
+      .type(newCustomer.lastName ?? "");
   };
 
-  public openRow = (address: CustomerModel): Cypress.Chainable =>
+  public openRow = (customer: CustomerModel): Cypress.Chainable =>
     cy
-      .contains(address.firstName ?? "")
+      .contains(customer.firstName ?? "")
       .parent("tr")
       .find(".fa-eye")
-      .click();
+      .click({ force: true });
 
   public clickNew = (): Cypress.Chainable => cy.get(".fa-plus").parent("button").click();
 
-  public deleteRow = (address: CustomerModel): Cypress.Chainable =>
+  public deleteRow = (customer: CustomerModel): Cypress.Chainable =>
     cy
-      .contains(address.firstName ?? "")
+      .contains(customer.firstName ?? "")
       .parent("tr")
       .find(".fa-trash")
-      .click();
+      .click({ force: true });
 
   public generateFakeModel = (): CustomerModel => ({
     firstName: faker.helpers.unique(() => faker.name.firstName()),

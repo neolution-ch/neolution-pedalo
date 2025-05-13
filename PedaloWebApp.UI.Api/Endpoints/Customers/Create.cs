@@ -22,7 +22,7 @@
         }
 
         /// <summary>
-        /// API method to create a new address entry
+        /// API method to create a new customer entry
         /// </summary>
         /// <param name="request">The request.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
