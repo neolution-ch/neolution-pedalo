@@ -1,0 +1,75 @@
+{
+  // Use IntelliSense to find out which attributes exist for C# debugging
+  // Use hover for the description of the existing attributes
+  // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "requireExactSource": false,
+      "name": "PedaloWebApp.UI.Api",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build PedaloWebApp.UI.Api",
+      "program": "${workspaceFolder}/PedaloWebApp.UI.Api/bin/Debug/net8.0/PedaloWebApp.UI.Api.dll",
+      "cwd": "${workspaceFolder}/PedaloWebApp.UI.Api",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "PedaloWebApp.Tools.DataInitializer",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build PedaloWebApp.Tools.DataInitializer",
+      "program": "${workspaceFolder}/PedaloWebApp.Tools.DataInitializer/bin/Debug/net8.0/PedaloWebApp.Tools.DataInitializer.dll",
+      "cwd": "${workspaceFolder}/PedaloWebApp.Tools.DataInitializer",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "name": "PedaloWebApp.UI.Client",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "yarn dev",
+      "serverReadyAction": {
+        "pattern": "Local:.* (https?://.+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome",
+        "webRoot": "${workspaceFolder}/PedaloWebApp.UI.Client"
+      },
+      "cwd": "${workspaceFolder}/PedaloWebApp.UI.Client"
+    },
+    {
+      "name": "PedaloWebApp.UI.Client: run production build",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["buildandstart"],
+      "cwd": "${workspaceFolder}/PedaloWebApp.UI.Client",
+      "console": "integratedTerminal",
+      "autoAttachChildProcesses": false
+    },
+    {
+      "name": "PedaloWebApp.FunctionalTests: open",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["cypress", "open"],
+      "cwd": "${workspaceFolder}/PedaloWebApp.FunctionalTests",
+      "console": "integratedTerminal",
+      "autoAttachChildProcesses": false
+    },
+    {
+      "name": "PedaloWebApp.FunctionalTests: run",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["cypress", "run"],
+      "cwd": "${workspaceFolder}/PedaloWebApp.FunctionalTests",
+      "console": "integratedTerminal",
+      "autoAttachChildProcesses": false
+    }
+  ]
+}

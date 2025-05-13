@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["es5", "es6", "dom"],
+    "types": ["cypress", "node", "mssql"],
+    "isolatedModules": true,
+    "moduleResolution": "Node",
+    "baseUrl": "./cypress",
+    "strict": true,
+    "allowUnreachableCode": false,
+    "skipLibCheck": true,
+    "allowUnusedLabels": false,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": false,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": false,
+    "noUnusedParameters": false,
+    "noEmit": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}

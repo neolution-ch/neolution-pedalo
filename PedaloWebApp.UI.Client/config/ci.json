@@ -1,0 +1,6 @@
+{
+  "serverRuntimeConfig": {},
+  "publicRuntimeConfig": {
+    "apiBaseUrl": "http://api"
+  }
+}

@@ -1,0 +1,288 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, ready_for_review]
+
+# cancel running actions for current PR if new commits were pushed
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  statuses: write
+  checks: write
+  contents: write
+  pull-requests: write
+  issues: read
+  actions: write
+
+jobs:
+  generate-open-api-spec:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: neolution-ch/action-check-suppressions@v1
+        with:
+          continueOnError: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: dotnet build api
+        run: |
+          dotnet build -c Debug ./PedaloWebApp.UI.Api/PedaloWebApp.UI.Api.csproj
+
+      - name: publish spec.json
+        uses: actions/upload-artifact@v4
+        with:
+          name: spec-json-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ./PedaloWebApp.UI.Api/openapi-spec.json
+
+  unit-tests:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: docker build -t unit-test-runner -f ./docker/UnitTestRunner/Dockerfile .
+
+      - name: "Run the unit tests"
+        run: |
+          docker run --name unit-test-runner unit-test-runner
+          docker cp unit-test-runner:testresults .
+
+      - name: Test Reporter
+        uses: dorny/test-reporter@v1.5.0
+        if: always()
+        with:
+          name: Report Unit Tests
+          path: ./testresults/*.trx
+          reporter: dotnet-trx
+
+      - name: cobertura-report
+        uses: 5monkeys/cobertura-action@v13
+        with:
+          path: ./testresults/**/coverage.cobertura.xml
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          minimum_coverage: 0
+          only_changed_files: true
+
+      # required for the merge reports job
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      # merge is required to get a single coverage report for the summary report because
+      # if you have like 3 UnitTest projects in the solution it will generate one file per project
+      # and dependencies like Core or Infrastructure will be part of each file. This job merges them.
+      # https://learn.microsoft.com/en-us/dotnet/core/additional-tools/dotnet-coverage
+      - name: Merge coverage reports
+        working-directory: ./testresults
+        run: |
+          dotnet tool install --global dotnet-coverage --ignore-failed-sources
+          dotnet-coverage merge -o coverage-merged.xml -f cobertura -r coverage.cobertura.xml
+
+      - name: Code Coverage Summary Report
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: ./testresults/coverage-merged.xml
+          format: markdown
+          output: both
+
+        # this belongs to the cover summary report
+      - name: Add Coverage PR Comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: github.event_name == 'pull_request'
+        with:
+          recreate: true
+          path: code-coverage-results.md
+
+  build-dockers:
+    needs: [generate-open-api-spec]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - docker-image-tag: pedalo-ui-api
+            docker-compose-service: api
+          - docker-image-tag: pedalo-ui-client
+            docker-compose-service: client
+          - docker-image-tag: pedalo-tools-data-initalizer
+            docker-compose-service: data-initializer
+          - docker-image-tag: pedalo-ui-cypress
+            docker-compose-service: cypress-tests
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: download spec-json-${{ github.run_id }}-${{ github.run_attempt }}
+        uses: actions/download-artifact@v4
+        with:
+          name: spec-json-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ./PedaloWebApp.UI.Api
+
+      - name: Expose GitHub Runtime
+        uses: crazy-max/ghaction-github-runtime@v3
+
+      - name: "Set up Docker Buildx"
+        uses: docker/setup-buildx-action@v3
+
+      - name: "Build docker compose"
+        run: docker buildx bake --load ${{ matrix.docker-compose-service }}
+        shell: bash
+
+      - name: "Run check-deps for data-initializer"
+        if: ${{ matrix.docker-compose-service == 'data-initializer' }}
+        run: docker run ${{ matrix.docker-image-tag }} check-deps
+        shell: bash
+
+      - name: "Save docker images"
+        # if: ${{ matrix.docker-compose-service }} != "data-initializer"
+        run: |
+          mkdir docker-images
+          docker save -o "./docker-images/${{ matrix.docker-compose-service }}.tar" ${{ matrix.docker-image-tag }}
+        shell: bash
+
+      - uses: actions/cache/save@v4
+        # if: ${{ matrix.docker-compose-service }} != "data-initializer"
+        with:
+          path: ./docker-images
+          key: docker-image-${{ matrix.docker-compose-service }}-${{ github.run_id }}-${{ github.run_attempt }}
+
+  cypress-tests:
+    needs: [build-dockers]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        total: [2]
+        index: [1, 2]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: ./docker-images
+          key: docker-image-api-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: ./docker-images
+          key: docker-image-client-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: ./docker-images
+          key: docker-image-data-initializer-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: ./docker-images
+          key: docker-image-cypress-tests-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: "Load docker images"
+        run: |
+          docker load -i "./docker-images/api.tar"
+          docker load -i "./docker-images/client.tar"
+          docker load -i "./docker-images/data-initializer.tar"
+          docker load -i "./docker-images/cypress-tests.tar"
+
+      - name: "Docker compose up"
+        run: |
+          tests=($(cd PedaloWebApp.FunctionalTests && find cypress/e2e/ -type f -name "*.cy.ts"))
+          testCount=${#tests[@]}
+          totalAgents=${{ matrix.total }}
+          agentNumber=${{ matrix.index }}
+
+          if [ $totalAgents -eq 0 ]; then totalAgents=1; fi
+          if [ -z "$agentNumber" ]; then agentNumber=1; fi
+
+          echo "Total agents: $totalAgents"
+          echo "Agent number: $agentNumber"
+          echo "Total tests: $testCount"
+
+          echo "Target tests:"
+          filter=""
+          for ((i=$agentNumber; i <= $testCount;i=$((i+$totalAgents)))); do
+            targetTestName=${tests[$i -1]}
+            echo "$targetTestName"
+            filter+=",${targetTestName}"
+          done
+          export CYPRESS_SPEC=${filter#","}
+
+          docker compose up -d
+
+      - name: Wait for tests to finish
+        run: |
+          docker compose logs --follow cypress-tests
+
+      - name: Display all logs
+        if: always()
+        run: |
+          docker compose logs
+
+      - name: Copy the results from the cypress container
+        run: |
+          mkdir ./cypress_results/
+          docker compose cp cypress-tests:/usr/src/app/cypress/results/ ./cypress_results/results/ || true
+          docker compose cp cypress-tests:/usr/src/app/cypress/videos/ ./cypress_results/videos/ || true
+          docker compose cp cypress-tests:/usr/src/app/cypress/screenshots/ ./cypress_results/screenshots/ || true
+
+      - name: "Publish screenshots"
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots-${{ matrix.index }}
+          path: ./cypress_results/screenshots
+
+      - name: "Publish videos"
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos-${{ matrix.index }}
+          path: ./cypress_results/videos
+
+      - name: "Publish results"
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-raw-results-${{ matrix.index }}
+          path: ./cypress_results/results
+
+      - uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: "Results Cypress Tests - ${{ matrix.index }}"
+          reporter: java-junit
+          path: ./cypress_results/results/**/e2e-tests-*.xml
+
+  clean-up:
+    if: always()
+    needs: [cypress-tests]
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          cachesToDelete=( \
+            docker-image-api-${{ github.run_id }}-${{ github.run_attempt }} \
+            docker-image-client-${{ github.run_id }}-${{ github.run_attempt }} \
+            docker-image-data-initializer-${{ github.run_id }}-${{ github.run_attempt }} \
+            docker-image-cypress-tests-${{ github.run_id }}-${{ github.run_attempt }} \
+            spec-json-${{ github.run_id }}-${{ github.run_attempt }} \
+          )
+
+          for cache in "${cachesToDelete[@]}"; do
+            echo "Deleting cache $cache"
+            gh api \
+              --method DELETE \
+              -H "Accept: application/vnd.github+json" \
+              /repos/${{ github.repository }}/actions/caches?key=$cache || continue
+          done
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

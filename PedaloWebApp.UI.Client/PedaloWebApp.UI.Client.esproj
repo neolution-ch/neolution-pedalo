@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.62-alpha">
+  <PropertyGroup>
+    <CleanCommand>yarn build:cleanup</CleanCommand>
+    <BuildCommand>yarn build</BuildCommand>
+  </PropertyGroup>
+</Project>

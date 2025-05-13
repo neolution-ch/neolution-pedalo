@@ -1,0 +1,29 @@
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true
+  },
+  "files.exclude": {
+    "**/.git": true
+  },
+  "files.watcherExclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/.next": true
+  },
+  "editor.formatOnSave": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.workingDirectories": [
+    "PedaloWebApp.UI.Client",
+    "PedaloWebApp.FunctionalTests"
+  ],
+  "dotnet.defaultSolution": "Pedalo.sln"
+}

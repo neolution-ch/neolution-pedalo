@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.62-alpha">
+  <PropertyGroup>
+    <BuildCommand>yarn build</BuildCommand>
+  </PropertyGroup>
+</Project>

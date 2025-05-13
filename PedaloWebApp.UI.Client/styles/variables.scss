@@ -1,0 +1,200 @@
+// Based on: https://github.com/0wczar/airframe-react
+$neolution: #faba2f;
+$neolution-light: #faba2f2f;
+$primary: #513bc9; // Modified
+$spacer: 1rem !default;
+$font-weight-normal: 400 !default;
+$white: #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #868e96 !default;
+$gray-700: #5d636d !default;
+$gray-800: #3f4651 !default;
+$gray-900: #353c48 !default;
+$black: #1f2d3d !default;
+$dark: $gray-800 !default;
+$border-width: 1px !default;
+
+// body
+$body-bg: #f9fafc !default; // changed
+$body-color: #8493a5 !default; // changed
+$body-margin: 0;
+
+$input-btn-border-width: $border-width !default;
+$table-color: $body-color !default;
+$table-hover-bg: rgba($gray-500, 0.075) !default; // changed
+$border-radius: 0.25rem !default;
+$border-radius-lg: 0.3rem !default;
+$border-radius-sm: 0.2rem !default;
+
+// Links
+
+$link-color: $dark !default; //changed
+$link-decoration: none !default;
+$link-hover-color: darken($link-color, 18%) !default; //changed
+$link-hover-decoration: none !default; //changed
+
+// Components
+
+$line-height-sm: 1.5 !default; //changed
+$line-height-lg: 1.5 !default; //changed
+
+// Typography
+
+$font-family-sans-serif: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif,
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default; //changed
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base: $font-family-sans-serif !default;
+
+$font-size-base: 0.875rem !default; // Assumes the browser default, typically `16px` changed
+$font-size-lg: $font-size-base * 1.11429 !default; // changed
+$font-size-sm: $font-size-base * 0.85714 !default; // changed
+
+$line-height-base: 1.6 !default; //changed
+
+$h6-font-size: 0.9rem !default; //changed
+
+$headings-margin-bottom: $spacer / 2 !default;
+$headings-font-family: inherit !default; //changed
+$headings-font-weight: $font-weight-normal !default; //changed
+$headings-color: $gray-900 !default; //changed
+
+// scss-docs-start display-headings
+$display-font-sizes: (
+  1: 6rem,
+  2: 5.5rem,
+  3: 4.5rem,
+  4: 3.1rem,
+  5: 3rem,
+  6: 2.5rem,
+) !default;
+
+$small-font-size: 12px !default; //changed
+
+$text-muted: lighten($body-color, 14%) !default; //changed
+
+// Tables
+
+$table-cell-padding: 0.75rem !default; // changed
+$table-cell-padding-sm: 0.3rem !default; // changed
+
+$table-bg: null !default;
+$table-accent-bg: rgba($gray-500, 0.075) !default; // changed
+$table-hover-color: $table-color !default;
+$table-hover-bg: rgba($gray-500, 0.075) !default; // changed
+$table-active-bg: $table-hover-bg !default;
+
+$table-border-width: $border-width !default;
+$table-border-color: $gray-200 !default; // changed
+
+$table-head-bg: $gray-200 !default;
+$table-head-color: $body-color !default; // changed
+
+$table-caption-color: $body-color !default; // changed
+
+// Forms
+
+$input-bg: $body-bg !default; // changed
+$input-disabled-bg: $body-bg !default; // changed
+
+$input-color: $gray-700 !default; // changed
+$input-border-color: $gray-300 !default; // changed
+$input-border-width: $input-btn-border-width !default;
+$input-box-shadow: inset 0 1px 1px rgba($black, 0.075) !default;
+
+$input-group-addon-bg: $gray-100 !default; // changed
+$input-group-addon-border-color: $gray-300 !default; // changed
+
+// Navs
+
+$nav-link-padding-y: 0.5rem !default;
+$nav-link-padding-x: 1rem !default;
+$nav-link-disabled-color: $gray-600 !default;
+
+$nav-pills-border-radius: $border-radius !default;
+$nav-pills-link-active-color: $black !default; // changed
+$nav-pills-link-active-bg: $gray-200 !default; // changed
+
+$navbar-light-color: $body-color !default; // change
+$navbar-light-hover-color: $black !default; // change
+$navbar-light-active-color: $black !default; // change
+$navbar-light-disabled-color: rgba($black, 0.3) !default;
+$navbar-light-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-light-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
+$navbar-light-toggler-border-color: rgba($black, 0.1) !default;
+
+// Dropdowns
+
+$dropdown-border-color: $gray-300 !default; // changed
+
+$dropdown-link-color: $body-color !default; // change
+$dropdown-link-hover-color: darken($gray-900, 5%) !default;
+$dropdown-link-hover-bg: $gray-100 !default;
+
+$dropdown-link-active-color: $black !default; // change
+$dropdown-link-active-bg: $gray-200 !default; // change
+
+$dropdown-link-disabled-color: $gray-600 !default;
+
+$dropdown-header-color: $body-color !default; // change
+
+// Pagination
+
+$pagination-color: $body-color !default; // change
+$pagination-bg: transparent !default; // change
+
+$pagination-hover-color: $black !default; // change
+
+$pagination-active-color: $black !default; // change
+$pagination-active-bg: $gray-300 !default; //change
+$pagination-active-border-color: $gray-300 !default; // change
+
+$pagination-disabled-color: $body-color !default; // change
+$pagination-disabled-bg: transparent !default; // change
+
+// Tooltips
+
+$tooltip-bg: $dark !default; // change
+$tooltip-arrow-color: $dark !default; // change
+
+// Popovers
+
+$popover-bg: $dark !default; // changed
+$popover-border-color: $dark !default; // changed
+
+$popover-header-bg: $dark !default; // change
+$popover-header-color: $white !default; // change
+
+// Modals
+
+$modal-content-border-color: rgba($black, 0.2) !default;
+
+// List group
+
+$list-group-color: null !default;
+$list-group-border-color: $gray-200 !default; // change
+
+$list-group-hover-bg: $gray-100 !default;
+$list-group-active-color: $black !default; // change
+$list-group-active-bg: $gray-100 !default; // change
+$list-group-active-border-color: $gray-200 !default; // change
+
+$list-group-action-color: $body-color !default; // change
+$list-group-action-hover-color: $black !default; // change
+
+$list-group-action-active-color: $body-color !default;
+$list-group-action-active-bg: $gray-100 !default; // change
+
+// Breadcrumbs
+
+$breadcrumb-padding-y: 0.75rem !default;
+$breadcrumb-padding-x: 1rem !default;
+$breadcrumb-item-padding-x: 0.5rem !default;
+
+$breadcrumb-margin-bottom: 1rem !default;
+
+$breadcrumb-bg: transparent !default; // changed
+$breadcrumb-active-color: $body-color !default; // changed
+$breadcrumb-border-radius: $border-radius !default;
