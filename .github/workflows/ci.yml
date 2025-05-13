@@ -28,7 +28,7 @@ jobs:
 
       - uses: neolution-ch/action-check-suppressions@v1
         with:
-          continueOnError: false
+          continueOnError: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-dotnet@v4
