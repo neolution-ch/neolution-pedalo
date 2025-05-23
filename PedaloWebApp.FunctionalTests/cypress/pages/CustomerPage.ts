@@ -2,7 +2,8 @@ import { faker } from "@faker-js/faker";
 import type { CustomerModel } from "orval/axios";
 
 class CustomerPage {
-  public rowExists = (customer: CustomerModel): Cypress.Chainable => cy.dataTableRowExists(customer.firstName ?? "", customer.lastName ?? "");
+  public rowExists = (customer: CustomerModel): Cypress.Chainable =>
+    cy.dataTableRowExists(customer.firstName ?? "", customer.lastName ?? "");
 
   public rowNotExists = (customer: CustomerModel): Cypress.Chainable =>
     cy.dataTableRowNotExists(customer.firstName ?? "", customer.lastName ?? "");

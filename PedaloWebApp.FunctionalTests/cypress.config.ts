@@ -65,8 +65,9 @@ export default defineConfig({
             .filter((test) => test.state === "passed")
             .forEach((test) => {
               if (test.attempts.find((attempt) => attempt.state === "failed")) {
-                failedTestString += `- Test "${test.title}" failed ${test.attempts.filter((attempt) => attempt.state === "failed").length
-                  } time(s) before succeeding\r\n`;
+                failedTestString += `- Test "${test.title}" failed ${
+                  test.attempts.filter((attempt) => attempt.state === "failed").length
+                } time(s) before succeeding\r\n`;
               }
             });
 

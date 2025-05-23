@@ -10,8 +10,10 @@ EXPOSE 80
 # Installing dependencies
 COPY PedaloWebApp.FunctionalTests/package.json ./
 COPY PedaloWebApp.FunctionalTests/yarn.lock ./
+COPY PedaloWebApp.FunctionalTests/.yarnrc.yml ./
 
 # restore dependencies
+RUN corepack enable
 RUN yarn --frozen-lockfile
 
 # Copying source files
