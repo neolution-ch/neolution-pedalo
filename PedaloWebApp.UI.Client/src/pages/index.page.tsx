@@ -13,7 +13,13 @@ const HomePage: NextPage = () => (
       <h1>Welcome to the Rent-A-Pedalo</h1>
       <p>This template already includes various features which will be exaplained here.</p>
       <ul>
-        <li>Fully working <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete" className="link-primary" target="_blank" rel="noreferrer">CRUD</a> customer management</li>
+        <li>
+          Fully working{" "}
+          <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete" className="link-primary" target="_blank" rel="noreferrer">
+            CRUD
+          </a>{" "}
+          customer management
+        </li>
         <li>Download a PDF fact sheet for each customer</li>
         <li>Overview of the pedalo fleet</li>
         <li>Overview of the past and current bookings</li>

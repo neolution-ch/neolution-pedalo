@@ -13,7 +13,14 @@ import {
 import { toastError, toastSuccess } from "src/components/Misc/Toasts";
 import { SideBarLayout } from "@neolution-ch/react-pattern-ui";
 import { useT } from "src/hooks/useT";
-import { CustomerModel, TranslationCodeId, customersQuery, useCustomersDelete, useCustomersQuery, getCustomersPdfQueryKey } from "src/orval/react-query";
+import {
+  CustomerModel,
+  TranslationCodeId,
+  customersQuery,
+  useCustomersDelete,
+  useCustomersQuery,
+  getCustomersPdfQueryKey,
+} from "src/orval/react-query";
 import { useRouter } from "next/router";
 import { Pathname } from "src/utils/routes";
 import { ReactDataTableLinkRender } from "src/components/ReactDataTableLinkRender/ReactDataTableLinkRender";
@@ -56,7 +63,7 @@ const ListPage = () => {
       filter: {
         filterType: ColumnFilterType.String,
       },
-    }
+    },
   ];
 
   const actions: DataTableRoutedActions<T, Pathname> = {
@@ -77,16 +84,8 @@ const ListPage = () => {
     others: [
       {
         formatter: ({ row }) => (
-          <a
-            href={`/api/proxy${getCustomersPdfQueryKey(row.customerId)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon
-              icon={faFilePdf}
-              style={{ cursor: "pointer" }}
-              title={t(TranslationCodeId.Button_DownloadPdf)}
-            />
+          <a href={`/api/proxy${getCustomersPdfQueryKey(row.customerId)}`} target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faFilePdf} style={{ cursor: "pointer" }} title={t(TranslationCodeId.Button_DownloadPdf)} />
           </a>
         ),
       },

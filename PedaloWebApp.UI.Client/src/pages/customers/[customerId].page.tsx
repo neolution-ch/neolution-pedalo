@@ -23,9 +23,7 @@ const UpdateCustomerPage = () => {
           <CardBody>
             <CardTitle tag="h3">{t(TranslationCodeId.Title_Customer_Edit)}</CardTitle>
             <Row>
-              <Col lg="3">
-                {!isLoading && data && <CustomerForm defaultValues={data} />}
-              </Col>
+              <Col lg="3">{!isLoading && data && <CustomerForm defaultValues={data} />}</Col>
             </Row>
           </CardBody>
         </Card>

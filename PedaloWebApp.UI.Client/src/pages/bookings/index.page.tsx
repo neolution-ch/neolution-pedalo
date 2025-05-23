@@ -1,12 +1,7 @@
 import React, { useRef } from "react";
 import { Card, CardBody, CardTitle } from "reactstrap";
 import Head from "next/head";
-import {
-  ColumnFilterType,
-  DataTable,
-  DataTableColumnDescription,
-  ListSortDirection,
-} from "@neolution-ch/react-data-table";
+import { ColumnFilterType, DataTable, DataTableColumnDescription, ListSortDirection } from "@neolution-ch/react-data-table";
 import { SideBarLayout } from "@neolution-ch/react-pattern-ui";
 import { useT } from "src/hooks/useT";
 import { BookingModel, TranslationCodeId, bookingsQuery, useBookingsQuery } from "src/orval/react-query";

@@ -1,12 +1,7 @@
 import React, { useRef } from "react";
 import { Card, CardBody, CardTitle } from "reactstrap";
 import Head from "next/head";
-import {
-  ColumnFilterType,
-  DataTable,
-  DataTableColumnDescription,
-  ListSortDirection,
-} from "@neolution-ch/react-data-table";
+import { ColumnFilterType, DataTable, DataTableColumnDescription, ListSortDirection } from "@neolution-ch/react-data-table";
 import { SideBarLayout } from "@neolution-ch/react-pattern-ui";
 import { useT } from "src/hooks/useT";
 import { PedaloModel, TranslationCodeId, pedalosQuery, usePedalosQuery } from "src/orval/react-query";
@@ -35,9 +30,7 @@ const ListPage = () => {
       dataField: "color",
       text: t(TranslationCodeId.Label_Color),
       formatter: ({ value }: { value: PedaloColor }) =>
-        (Object.keys(PedaloColor) as (keyof typeof PedaloColor)[]).find(
-          key => PedaloColor[key] === value
-        ) || "",
+        (Object.keys(PedaloColor) as (keyof typeof PedaloColor)[]).find((key) => PedaloColor[key] === value) || "",
     },
     {
       dataField: "capacity",

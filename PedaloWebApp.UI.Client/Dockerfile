@@ -1,4 +1,4 @@
-FROM node:20-alpine3.17 AS build
+FROM node:22-alpine3.20 AS build
 
 # Needed for base64 -w option...
 # ref: https://stackoverflow.com/a/57921202
@@ -12,8 +12,10 @@ WORKDIR /usr/src/app
 COPY PedaloWebApp.UI.Client/package.json ./
 COPY PedaloWebApp.UI.Client/yarn.lock ./
 COPY PedaloWebApp.UI.Client/.npmrc ./
+COPY PedaloWebApp.UI.Client/.yarnrc.yml ./
 
 # restore dependencies
+RUN corepack enable
 RUN yarn --frozen-lockfile
 
 # Copying source files
@@ -29,7 +31,7 @@ RUN yarn prettier . --check
 RUN yarn lint
 RUN yarn build
 
-FROM node:20-alpine3.17 AS final
+FROM node:22-alpine3.20 AS final
 
 RUN apk --no-cache add curl
 
