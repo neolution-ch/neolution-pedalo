@@ -19,7 +19,7 @@ services:
       - 40281:80
     environment:
       - DOTNET_ENVIRONMENT=Development
-      - ConnectionStrings__AppDbContext=Server=mssql;Database=pedalo;User ID=sa;Password=Test1234!;TrustServerCertificate=True;Encrypt=True;
+      - ConnectionStrings__AppDbContext=Server=mssql;Database=neolution_pedalo;User ID=sa;Password=Test1234!;TrustServerCertificate=True;Encrypt=True;
       - SiteConfig__ClientBaseUrl=http://client
     depends_on:
       data-initializer:
