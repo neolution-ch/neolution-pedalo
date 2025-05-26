@@ -33,6 +33,7 @@ RUN yarn build
 
 FROM node:22-alpine3.20 AS final
 
+RUN corepack enable
 RUN apk --no-cache add curl
 
 WORKDIR /usr/src/app
