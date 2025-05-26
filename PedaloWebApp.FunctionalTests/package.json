@@ -1,0 +1,42 @@
+{
+  "name": "pedalo.functional-tests",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "prebuild": "npm run lint",
+    "build": "tsc --noEmit",
+    "check": "yarn install --check-files",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "kill": "taskkill /im node.exe /F",
+    "lint": "yarn eslint \"**/*.{ts,tsx}\" --cache --max-warnings 0",
+    "start": "cypress open",
+    "upgradeAll": "npm-check-updates -u"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "axios": "^1.6.0",
+    "cypress": "12.3.0",
+    "cypress-terminal-report": "^5.0.0",
+    "mssql": "^9.0.1",
+    "openapi-types": "^12.1.3",
+    "orval": "^6.17.0",
+    "otplib": "^12.0.1",
+    "replace-in-file": "^7.0.1",
+    "swagger2openapi": "^7.0.8"
+  },
+  "devDependencies": {
+    "@neolution-ch/eslint-config-neolution": "^1.3.0",
+    "@types/mssql": "^8.1.1",
+    "@types/node": "^18.11.18",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.5.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.0.0",
+    "typescript": "^4.9.4"
+  },
+  "packageManager": "yarn@4.1.1+sha512.ec40d0639bb307441b945d9467139cbb88d14394baac760b52eca038b330d16542d66fef61574271534ace5a200518dabf3b53a85f1f9e4bfa37141b538a9590"
+}

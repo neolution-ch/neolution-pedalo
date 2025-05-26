@@ -1,0 +1,16 @@
+.auth__wrapper.mfa .auth__content {
+  grid-template-columns: 1fr;
+
+  article {
+    margin: 3rem auto;
+    max-width: 420px;
+  }
+}
+
+.input-group:has(.react-datepicker-wrapper) {
+  z-index: revert;
+
+  &.is-invalid {
+    z-index: 10;
+  }
+}

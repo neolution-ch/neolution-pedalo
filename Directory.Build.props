@@ -1,0 +1,17 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="PedaloWebApp.Core.Application.Translations" />
+    <Using Include="PedaloWebApp.Core.Converters" />
+    <Using Include="PedaloWebApp.Core.Domain" />
+    <Using Include="PedaloWebApp.Core.Domain.Constants" />
+    <Using Include="PedaloWebApp.Core.Domain.Entities" />
+    <Using Include="PedaloWebApp.Core.Domain.Enums" />
+    <Using Include="PedaloWebApp.Core.Interfaces.Database" />
+  </ItemGroup>
+</Project>

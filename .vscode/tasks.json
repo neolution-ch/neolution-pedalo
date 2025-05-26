@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build PedaloWebApp.UI.Api",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "-c",
+        "Debug",
+        "${workspaceFolder}/PedaloWebApp.UI.Api/PedaloWebApp.UI.Api.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build PedaloWebApp.Tools.DataInitializer",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "-c",
+        "Debug",
+        "${workspaceFolder}/PedaloWebApp.Tools.DataInitializer/PedaloWebApp.Tools.DataInitializer.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    }
+  ]
+}

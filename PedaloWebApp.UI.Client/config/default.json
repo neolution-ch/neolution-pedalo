@@ -1,0 +1,15 @@
+{
+  "serverRuntimeConfig": {
+    "sslDetector": "azure",
+    "addHstsHeader": true,
+    "googleSecrets": {
+      "enabled": false,
+      "gcpProjectId": null
+    },
+    "validateSslCertificats": true
+  },
+  "publicRuntimeConfig": {
+    "apiBaseUrl": null,
+    "showCopyErrorMessageButton": true
+  }
+}
