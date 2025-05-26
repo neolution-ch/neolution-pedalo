@@ -59,7 +59,7 @@ jobs:
           docker cp unit-test-runner:testresults .
 
       - name: Test Reporter
-        uses: dorny/test-reporter@v1.5.0
+        uses: dorny/test-reporter@v2
         if: always()
         with:
           name: Report Unit Tests
@@ -255,7 +255,7 @@ jobs:
           name: cypress-raw-results-${{ matrix.index }}
           path: ./cypress_results/results
 
-      - uses: dorny/test-reporter@v1
+      - uses: dorny/test-reporter@v2
         if: always()
         with:
           name: "Results Cypress Tests - ${{ matrix.index }}"
