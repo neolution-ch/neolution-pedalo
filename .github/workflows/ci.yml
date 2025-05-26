@@ -67,7 +67,7 @@ jobs:
           reporter: dotnet-trx
 
       - name: cobertura-report
-        uses: 5monkeys/cobertura-action@v13
+        uses: 5monkeys/cobertura-action@v14
         with:
           path: ./testresults/**/coverage.cobertura.xml
           repo_token: ${{ secrets.GITHUB_TOKEN }}
