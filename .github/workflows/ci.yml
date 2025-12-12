@@ -149,7 +149,7 @@ jobs:
           docker save -o "./docker-images/${{ matrix.docker-compose-service }}.tar" ${{ matrix.docker-image-tag }}
         shell: bash
 
-      - uses: actions/cache/save@v4
+      - uses: actions/cache/save@v5
         # if: ${{ matrix.docker-compose-service }} != "data-initializer"
         with:
           path: ./docker-images
@@ -166,22 +166,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/cache/restore@v4
+      - uses: actions/cache/restore@v5
         with:
           path: ./docker-images
           key: docker-image-api-${{ github.run_id }}-${{ github.run_attempt }}
 
-      - uses: actions/cache/restore@v4
+      - uses: actions/cache/restore@v5
         with:
           path: ./docker-images
           key: docker-image-client-${{ github.run_id }}-${{ github.run_attempt }}
 
-      - uses: actions/cache/restore@v4
+      - uses: actions/cache/restore@v5
         with:
           path: ./docker-images
           key: docker-image-data-initializer-${{ github.run_id }}-${{ github.run_attempt }}
 
-      - uses: actions/cache/restore@v4
+      - uses: actions/cache/restore@v5
         with:
           path: ./docker-images
           key: docker-image-cypress-tests-${{ github.run_id }}-${{ github.run_attempt }}
