@@ -29,8 +29,6 @@
                 builder.WebHost.UseUrls($"http://+:{port}");
             }
 
-            builder.AddGoogleSecrets();
-
             var startup = new Startup(builder.Configuration);
             startup.ConfigureServices(builder.Services);
 

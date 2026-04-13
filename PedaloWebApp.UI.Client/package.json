@@ -23,7 +23,6 @@
     "@hookform/resolvers": "^2.9.10",
     "@neolution-ch/als-context": "^3.2.0",
     "@neolution-ch/javascript-utils": "^0.6.0",
-    "@neolution-ch/next-with-google-secrets": "^0.2.1",
     "@neolution-ch/react-data-table": "^3.3.0",
     "@neolution-ch/react-hook-form-components": "^2.7.0",
     "@neolution-ch/react-pattern-ui": "^2.6.0",

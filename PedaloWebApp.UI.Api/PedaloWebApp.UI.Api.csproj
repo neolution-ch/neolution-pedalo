@@ -26,7 +26,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Neolution.Extensions.Configuration.GoogleSecrets" Version="1.2.0" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.11" />
     <PackageReference Include="NSwag.Annotations" Version="14.0.7" />
     <PackageReference Include="NSwag.AspNetCore" Version="14.0.7" />
@@ -45,7 +44,9 @@
   </ItemGroup>
 
   <Target Condition="'$(BUILDS_IN_DOCKER)'==''" Name="NSwag" AfterTargets="Build">
-    <Exec Command="$(NSwagExe_Net80) run ./config.nswag.json /variables:Configuration=$(Configuration)" EnvironmentVariables="DOTNET_ENVIRONMENT=NSwag" />
+    <Exec
+      Command="$(NSwagExe_Net80) run ./config.nswag.json /variables:Configuration=$(Configuration)"
+      EnvironmentVariables="DOTNET_ENVIRONMENT=NSwag" />
   </Target>
 
 
