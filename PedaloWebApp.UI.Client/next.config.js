@@ -1,7 +1,6 @@
 /* eslint-disable */
 const config = require("config");
 const { IgnorePlugin, DefinePlugin } = require("webpack");
-const { withGoogleSecrets } = require("@neolution-ch/next-with-google-secrets");
 const withRoutes = require("nextjs-routes/config")();
 const { createSecureHeaders } = require("next-secure-headers");
 
@@ -11,10 +10,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 const { serverRuntimeConfig, publicRuntimeConfig } = config;
 
-const {
-  googleSecrets: { enabled: googleSecretsEnabled, gcpProjectId: googleSecretsProjectId },
-  validateSslCertificats,
-} = serverRuntimeConfig;
+const { validateSslCertificats } = serverRuntimeConfig;
 
 // write this value to the environment so that it can be used in the middleware:
 // https://github.com/vercel/next.js/discussions/35690
@@ -110,16 +106,5 @@ const nextConfig = {
 };
 
 module.exports = async () => {
-  const nextConfigWithSecrets = await withGoogleSecrets({
-    enabled: googleSecretsEnabled && !(process.env.IS_BUILD == "true"),
-    projectName: googleSecretsProjectId,
-    filter: "labels.front-end:*",
-    mapping: {
-      GoogleClientSecret: "serverRuntimeConfig__nextAuth__oAuthProviders__google__clientSecret",
-      NextAuthSecret: "serverRuntimeConfig__nextAuth__secret",
-    },
-    nextConfig: nextConfig,
-  });
-
-  return withRoutes(withBundleAnalyzer(nextConfigWithSecrets));
+  return withRoutes(withBundleAnalyzer(nextConfig));
 };

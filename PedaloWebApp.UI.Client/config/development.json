@@ -1,10 +1,6 @@
 {
   "serverRuntimeConfig": {
     "addHstsHeader": false,
-    "googleSecrets": {
-      "enabled": true,
-      "gcpProjectId": "white-label-development-3948"
-    },
     "validateSslCertificats": false
   },
   "publicRuntimeConfig": {

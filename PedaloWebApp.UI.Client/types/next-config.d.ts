@@ -14,13 +14,7 @@ declare module "next/config" {
   interface ServerRuntimeConfig {
     sslDetector: string;
     addHstsHeader: boolean;
-    googleSecrets: GoogleSecrets;
     validateSslCertificats: boolean;
-  }
-
-  interface GoogleSecrets {
-    enabled: boolean;
-    gcpProjectId: string;
   }
 
   declare const getConfig: ConfigTypes;
