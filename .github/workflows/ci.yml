@@ -40,7 +40,7 @@ jobs:
           dotnet build -c Debug ./PedaloWebApp.UI.Api/PedaloWebApp.UI.Api.csproj
 
       - name: publish spec.json
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: spec-json-${{ github.run_id }}-${{ github.run_attempt }}
           path: ./PedaloWebApp.UI.Api/openapi-spec.json
@@ -236,21 +236,21 @@ jobs:
 
       - name: "Publish screenshots"
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: cypress-screenshots-${{ matrix.index }}
           path: ./cypress_results/screenshots
 
       - name: "Publish videos"
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: cypress-videos-${{ matrix.index }}
           path: ./cypress_results/videos
 
       - name: "Publish results"
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: cypress-raw-results-${{ matrix.index }}
           path: ./cypress_results/results
